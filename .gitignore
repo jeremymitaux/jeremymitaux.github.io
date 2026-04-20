@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+.claude/
+index copy.html
+index copy 2.html
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
