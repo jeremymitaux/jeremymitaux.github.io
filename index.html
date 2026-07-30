@@ -242,9 +242,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .wlist{list-style:none;margin:.8rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem}
 @media (max-width:560px){ .wlist{grid-template-columns:repeat(2,minmax(0,1fr))} }
 .wrow{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:.35rem;
-  padding:.6rem .7rem .55rem;border:1px solid var(--rule-soft);border-radius:6px;background:var(--card);
+  padding:.6rem .7rem .55rem;border:1px solid var(--rule);border-radius:6px;background:var(--card);
   transition:border-color .2s ease,background .2s ease}
-.wrow:hover{border-color:color-mix(in oklab,var(--coral) 50%,transparent)}
+.wrow:hover{border-color:color-mix(in oklab,var(--coral) 55%,transparent);
+  background:color-mix(in oklab,var(--coral) 6%,transparent)}
+.wrow:focus-within{border-color:var(--coral)}
 .wrow .t{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:.875rem;line-height:1.35;color:var(--head);
   text-decoration:underline;text-decoration-color:color-mix(in oklab,var(--coral) 45%,transparent);
   text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease}
