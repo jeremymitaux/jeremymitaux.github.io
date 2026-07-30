@@ -126,12 +126,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .updated{margin-top:.3rem;font-size:.8125rem;color:var(--muted)}
 .updated .sep{color:var(--faint);padding:0 .3ch}
 
-/* intro — the only prose visible before a click */
-.intro{margin-top:1.55rem;font-size:.9375rem;line-height:1.62}
-.intro p+p{margin-top:.7rem}
-.intro b{font-weight:600;color:var(--head)}
-:root[data-theme="dark"] .intro b{color:var(--ink)}
-
 /* depth-mode switch */
 .mode{display:flex;flex-direction:column;align-items:flex-end;gap:5px;padding-top:.35rem;user-select:none}
 .mode-cap{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.22em;color:var(--faint)}
@@ -380,12 +374,12 @@ footer{
   <div class="rv stack" style="transition-delay:.14s">
 
     <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-built">
+      <button class="dtrig" aria-expanded="false" aria-controls="d-oregon">
         <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
         <span class="dlabel" data-glitch>at Oregon</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
-      <div class="dbody"><div class="dinner" id="d-built" inert><div class="dpad">
+      <div class="dbody"><div class="dinner" id="d-oregon" inert><div class="dpad">
         <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026 · olympus stylus zoom · 35mm</figcaption></figure>
         <p>I received my B.S. in Data Science from the University of Oregon in 2026, where I served as Director of Venture Capital for the Oregon Blockchain Group and External VP of Chi Psi Fraternity.</p>
         <p>I'm interested in how emerging technologies reshape institutions, markets, and ultimately how they affect the human experience. That question feels like the defining challenge of this century.</p>
@@ -393,30 +387,22 @@ footer{
     </div>
 
     <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-oregon">
+      <button class="dtrig" aria-expanded="false" aria-controls="d-built">
         <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
         <span class="dlabel" data-glitch>building</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
-      <div class="dbody"><div class="dinner" id="d-oregon" inert><div class="dpad">
+      <div class="dbody"><div class="dinner" id="d-built" inert><div class="dpad">
         <ul class="roster">
           <li><span class="nm">Shakedown</span> <span class="sep">·</span> on-chain ticketing for independent music venues. Four years of fronting a band taught me that a single gig is dozens of handshake agreements; Shakedown writes them into the ticket — resale conditions the venue sets, QR check-in at the door, payment splits enforced in hardware, hybrid NFTs that keep working after the show. It won Best Use Case of Solana at QuackHacks III and reached the finals of Ledger's N3XT Build &amp; Show; Ledger later invited me on a podcast to walk through the build. The current build: Next.js and TypeScript, Supabase, Anchor contracts in Rust, Metaplex Core, Privy embedded wallets.</li>
-          <li><span class="nm">Henry's Uncle</span> <span class="sep">·</span> the greatest band you've never heard of. A three-piece power trio through college — 30-plus shows booked, promoted, and played a radio show. Two self-produced releases with one currently in the works. On <a href="https://open.spotify.com/search/Henry's%20Uncle" target="_blank" rel="noopener">Spotify</a>, with more on <a href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener">YouTube</a>.</li>
+          <li><span class="nm">Henry's Uncle</span> <span class="sep">·</span> the greatest band you've never heard of. A three-piece power trio through college — 30-plus shows booked, promoted, and played, with a radio show along the way. Two self-produced releases, and a third in the works. On <a href="https://open.spotify.com/search/Henry's%20Uncle" target="_blank" rel="noopener">Spotify</a>, with more on <a href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener">YouTube</a>.</li>
         </ul>
       </div></div></div>
     </div>
 
-    <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-experience">
-        <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
-        <span class="dlabel" data-glitch>experience</span>
-        <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
-      </button>
-      <div class="dbody"><div class="dinner" id="d-experience" inert><div class="dpad">
-        <ul class="roster">
-        </ul>
-      </div></div></div>
-    </div>
+    <!-- experience fold removed 2026-07-29 (opened onto an empty list).
+         to restore: copy the fold markup from the "Quiet redesign checkpoint"
+         commit (1e80093), id d-experience, and fill the roster before shipping. -->
 
     <div>
       <button class="dtrig" aria-expanded="false" aria-controls="d-photo">
@@ -459,8 +445,8 @@ footer{
         <ul class="hlist">
           <li class="hquote">“You do not merely want to be considered just the best of the best. You want to be considered the only ones who do what you do.”<span class="by">Jerry Garcia</span></li>
           <li class="hquote">“And now that you don't have to be perfect, you can be good.”<span class="by">John Steinbeck, East of Eden</span></li>
-          <li class="hquote">“You make my world so much bigger and I'm wondering if I do the same for you."”<span class="by">Celine Song, Past Lives</span></li>
-          <li class="hquote">“If you don't have the right people around you, and your mind is moving a million mph, you'll loose yourself.”<span class="by">Dave Chappelle</span></li>
+          <li class="hquote">“You make my world so much bigger and I'm wondering if I do the same for you.”<span class="by">Celine Song, Past Lives</span></li>
+          <li class="hquote">“If you don't have the right people around you, and your mind is moving a million mph, you'll lose yourself.”<span class="by">Dave Chappelle</span></li>
           <li class="hquote">“The right code won't run with the wrong .env file.”<span class="by">@javiercunat</span></li>
           <li class="hquote">"Love takes miles." <span class="by">Cameron Winter</span></li>
         </ul>
@@ -468,7 +454,7 @@ footer{
       <div class="hpanel" id="hp-a" role="tabpanel" aria-labelledby="ht-a">
         <ul class="hlist">
           <li class="hgroup" aria-hidden="true">my desert island collection</li>
-          <li><span class="ti"></span>, Grateful Dead</li>
+          <li><span class="ti">Europe ’72</span>, Grateful Dead</li>
           <li><span class="ti">Toys In The Attic</span>, Aerosmith</li>
           <li><span class="ti">Live on Red Barn Radio I & II</span>, Tyler Childers</li>
           <li><span class="ti">Two Star & The Dream Police </span>, Mk.gee</li>
