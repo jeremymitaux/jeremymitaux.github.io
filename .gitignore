@@ -1,5 +1,7 @@
 .DS_Store
 **/.DS_Store
+._*
+**/._*
 .claude/
 index copy.html
 index copy 2.html
