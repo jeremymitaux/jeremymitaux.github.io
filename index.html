@@ -169,13 +169,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .dbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
 .dbody.open{grid-template-rows:1fr}
 .dinner{overflow:hidden;min-height:0}
-.dpad{padding:.65rem 0 1.15rem 24px;color:var(--muted);font-size:.875rem;line-height:1.58;
+.dpad{position:relative;padding:.65rem 0 1.15rem 24px;color:var(--muted);font-size:.875rem;line-height:1.58;
   opacity:0;transform:translateY(-4px);transition:opacity .4s ease .08s,transform .4s ease .08s}
 .dbody.open .dpad{opacity:1;transform:none}
-@media (max-width:480px){ .dpad{padding-left:0} }
+/* hairline under the label's wave glyph — ties the open body to its label */
+.dpad::before{content:"";position:absolute;left:8px;top:.7rem;bottom:1.15rem;width:1px;background:var(--rule)}
+@media (max-width:480px){ .dpad{padding-left:0} .dpad::before{display:none} }
 /* expanded areas breathe wider than the column — room for photos */
 @media (min-width:60rem){
   .dbody{margin-left:-3.5rem;margin-right:-3.5rem}
+  .dpad::before{left:calc(3.5rem + 8px)}
 }
 .dphoto{float:right;width:min(46%,15rem);margin:.2rem 0 .9rem 1.4rem}
 .dphoto img{border-radius:4px;background:var(--card)}
