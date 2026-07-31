@@ -14,7 +14,7 @@
 <title>Jeremy Mitaux</title>
 <meta name="description" content="Jeremy Mitaux — building Shakedown, on-chain ticketing born from four years of fronting a band. Fund reports for the Oregon Blockchain Group's 25 ETH portfolio. Henry's Uncle for the music, a Canon AE-1 for the rest. Writing from Manila." />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#F4EFE3" id="metaTheme" />
+<meta name="theme-color" content="#F5EEDA" id="metaTheme" />
 <meta name="author" content="Jeremy Mitaux" />
 
 <meta property="og:type" content="website" />
@@ -32,7 +32,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Urbanist:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <script>
 /* theme boot — before paint */
@@ -53,36 +53,46 @@ document.documentElement.dataset.theme=t;}catch(e){document.documentElement.data
 
 <style>
 /* ═══════════ TOKENS ═══════════
-   light = SURFACE (warm paper, prussian ink, coral)
-   dark  = DEPTH   (night sea, lamplight paper)      */
+   light = SURFACE (sun-washed limestone, prussian ink, terracotta)
+   dark  = DEPTH   (lavender night over the Rhône, lamplight paper)
+
+   type: Louize Display (heads) / Haffer (body) lead the stacks —
+   they apply automatically once installed or @font-face'd here.
+   Until licensed, Gilda Display / Urbanist stand in.              */
 :root{
-  --paper:#F4EFE3; --paper-2:#ECE5D2;
+  color-scheme:light; /* lock UA widgets (scrollbars) to the active theme, not the OS */
+  --font-display:"Louize Display","Louize Display Trial","Gilda Display",Georgia,serif;
+  --font-body:"Haffer","Haffer Trial","Urbanist",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --paper:#F0EBDD; --paper-2:#EFE4CB;
   --ink:#1E2A38; --head:#16324F;
-  --muted:#5F6B77; --faint:#96A0AA;
-  --rule:#DCD4BF; --rule-soft:#E6DFCC;
-  --coral:#D96844; --coral-deep:#A6431F;
+  --muted:#66687A; --faint:#9C9BAD;
+  --rule:#DFD2B3; --rule-soft:#E8DDC2;
+  --coral:#CE6A3C; --coral-deep:#A34A1E;
   --wave:#16324F;
-  --wash:color-mix(in oklab,var(--coral) 22%,transparent);
   --card:rgba(22,50,79,.045);
   --lb:rgba(14,24,34,.94);
 }
 :root[data-theme="dark"]{
-  --paper:#0A1826; --paper-2:#0E2032;
+  color-scheme:dark;
+  --paper:#0D1727; --paper-2:#131D33;
   --ink:#DFDACB; --head:#EDE7D6;
-  --muted:#8FA0AF; --faint:#5D7080;
-  --rule:#1E3245; --rule-soft:#16293A;
-  --coral:#E88C63; --coral-deep:#F0A480;
+  --muted:#939BB0; --faint:#646E88;
+  --rule:#213046; --rule-soft:#192739;
+  --coral:#E6935C; --coral-deep:#F0A878;
   --wave:#7FA5C4;
-  --wash:color-mix(in oklab,var(--coral) 26%,transparent);
   --card:rgba(230,225,210,.045);
   --lb:rgba(4,10,16,.96);
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;
+  /* folds change page height — keep the gutter reserved and the bar quiet
+     so opening a section doesn't slam a scrollbar in and shift the column */
+  scrollbar-gutter:stable;scrollbar-width:thin;
+  scrollbar-color:color-mix(in srgb,var(--faint) 55%,transparent) transparent}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-body);
   font-size:15px;line-height:1.58;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background .35s ease,color .35s ease;
@@ -93,9 +103,6 @@ img{display:block;max-width:100%;height:auto}
 :focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:2px}
 h1,h2,h3,p{margin:0}
 button{font:inherit;color:inherit;background:none;border:0;padding:0}
-
-.mono{font-family:"Space Mono",ui-monospace,Menlo,monospace}
-.serif{font-family:"Fraunces",Georgia,serif}
 
 .skip{position:fixed;top:-60px;left:16px;z-index:400;background:var(--coral);color:#FFF6EC;
   padding:9px 16px;border-radius:8px;font-family:"Space Mono",monospace;font-size:12px;
@@ -121,10 +128,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 
 /* ═══════════ HEADER ═══════════ */
 .head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
-.name{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:1.55rem;letter-spacing:.005em;color:var(--head);line-height:1.15}
+.name{font-family:var(--font-display);font-weight:400;font-size:1.62rem;letter-spacing:.005em;color:var(--head);line-height:1.15}
 .name em{font-style:italic;font-weight:400}
 .updated{margin-top:.3rem;font-size:.8125rem;color:var(--muted)}
-.updated .sep{color:var(--faint);padding:0 .3ch}
 
 /* depth-mode switch */
 .mode{display:flex;flex-direction:column;align-items:flex-end;gap:5px;padding-top:.35rem;user-select:none}
@@ -147,12 +153,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 /* greek glitch */
 [data-glitch]{transition:color .2s ease}
 [data-glitch].glitching{color:var(--coral-deep)}
-
-/* ═══════════ INTRO ═══════════ */
-.lit{background-image:linear-gradient(transparent 64%,var(--wash) 0);background-repeat:no-repeat;
-  background-size:0% 100%;transition:background-size .8s cubic-bezier(.22,1,.36,1);
-  transition-delay:calc(.55s + var(--i,0)*.22s)}
-.in .lit{background-size:100% 100%}
 
 /* ═══════════ SECTIONS (disclosures) ═══════════ */
 .stack{margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
@@ -202,7 +202,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 /* ═══════════ INTERLUDE — the record ═══════════ */
 .inter{margin-top:1.7rem;text-align:center}
 .hlist{text-align:left}
-.inter-lede{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:1.06rem;color:var(--head)}
+.inter-lede{font-family:var(--font-display);font-style:italic;font-size:1.06rem;color:var(--head)}
 :root[data-theme="dark"] .inter-lede{color:var(--ink)}
 .inter-sub{margin-top:.25rem;font-size:.8125rem;color:var(--faint)}
 .htabs{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:.85rem}
@@ -226,7 +226,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .hlist::-webkit-scrollbar-thumb{background:var(--rule);border-radius:99px}
 .hquote{border-left:2px solid color-mix(in oklab,var(--coral) 35%,transparent);padding-left:.85rem}
 .hquote .by{display:block;margin-top:3px;font-style:italic;color:var(--faint)}
-.hlist .ti{font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--head)}
+.hlist .ti{font-family:var(--font-display);font-style:italic;color:var(--head)}
 :root[data-theme="dark"] .hlist .ti{color:var(--ink)}
 .hgroup{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--faint);margin-top:.4rem}
@@ -241,13 +241,38 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 @media (max-width:480px){ .wsub{padding-left:0} }
 .wlist{list-style:none;margin:.8rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem}
 @media (max-width:560px){ .wlist{grid-template-columns:repeat(2,minmax(0,1fr))} }
+/* animated gradient border — a slow terracotta light runs the card's edge.
+   conic-gradient on the border-box, angle driven by a registered custom
+   property; browsers without @property just get a static gradient ring. */
+@property --gradient-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@property --wcard{syntax:'<color>';initial-value:transparent;inherits:false}
+@keyframes gradient-rotate{to{--gradient-angle:360deg}}
 .wrow{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:.35rem;
-  padding:.6rem .7rem .55rem;border:1px solid var(--rule);border-radius:6px;background:var(--card);
-  transition:border-color .2s ease,background .2s ease}
-.wrow:hover{border-color:color-mix(in oklab,var(--coral) 55%,transparent);
-  background:color-mix(in oklab,var(--coral) 6%,transparent)}
-.wrow:focus-within{border-color:var(--coral)}
-.wrow .t{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:.875rem;line-height:1.35;color:var(--head);
+  padding:.6rem .7rem .55rem;border:1px solid transparent;border-radius:6px;
+  --wcard:color-mix(in srgb,var(--ink) 4.5%,var(--paper));
+  background:
+    linear-gradient(var(--wcard),var(--wcard)) padding-box,
+    conic-gradient(from var(--gradient-angle),
+      var(--rule) 0%,
+      color-mix(in oklab,var(--coral) 26%,var(--rule)) 32%,
+      color-mix(in oklab,var(--coral) 58%,var(--rule)) 37%,
+      color-mix(in oklab,var(--coral) 26%,var(--rule)) 42%,
+      var(--rule) 50%,
+      color-mix(in oklab,var(--coral) 26%,var(--rule)) 79%,
+      color-mix(in oklab,var(--coral) 58%,var(--rule)) 84%,
+      color-mix(in oklab,var(--coral) 26%,var(--rule)) 89%,
+      var(--rule) 96%) border-box;
+  animation:gradient-rotate 11s linear infinite;
+  transition:--wcard .2s ease}
+/* desync — each card starts mid-cycle at its own pace, so the lights wander */
+.wrow:nth-child(6n+2){animation-duration:12.5s;animation-delay:-3.2s}
+.wrow:nth-child(6n+3){animation-duration:10.2s;animation-delay:-6.8s}
+.wrow:nth-child(6n+4){animation-duration:13.4s;animation-delay:-1.9s}
+.wrow:nth-child(6n+5){animation-duration:11.8s;animation-delay:-8.4s}
+.wrow:nth-child(6n){animation-duration:9.6s;animation-delay:-5.1s}
+.wrow:hover,.wrow:focus-within{--wcard:color-mix(in srgb,var(--coral) 6%,var(--paper))}
+@media (prefers-reduced-motion:reduce){ .wrow{animation:none} }
+.wrow .t{font-family:var(--font-display);font-style:italic;font-size:.9rem;line-height:1.35;color:var(--head);
   text-decoration:underline;text-decoration-color:color-mix(in oklab,var(--coral) 45%,transparent);
   text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease}
 :root[data-theme="dark"] .wrow .t{color:var(--ink)}
@@ -257,16 +282,64 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .wrow .k{display:block;font-family:"Space Mono",monospace;font-size:8.5px;letter-spacing:.12em;color:var(--faint);
   text-transform:uppercase}
 
-/* ═══════════ PHOTOGRAPHY ═══════════ */
-.pgrid{columns:2;column-gap:10px;padding-top:.2rem}
-@media (max-width:480px){ .pgrid{columns:1} }
-.pgrid figure{margin:0 0 10px;break-inside:avoid;cursor:pointer;position:relative}
-.pgrid img{width:100%;border-radius:4px;background:var(--card);
-  transition:filter .3s ease,transform .3s ease}
-.pgrid figure:hover img{filter:brightness(1.04)}
-.pgrid figcaption{display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;
-  margin-top:4px;font-size:.75rem;color:var(--muted)}
-.pgrid .film{font-family:"Space Mono",monospace;font-size:8.5px;letter-spacing:.16em;color:var(--faint);flex:none}
+/* ═══════════ PHOTOGRAPHY — expanding strip ═══════════
+   one row of frames; the active one breathes open (flex-grow), the rest
+   wait as grayscale slivers. on fold-open the frames gather at the centre
+   then shoot out left and right — --k is distance from centre, --dd the
+   outward stagger. */
+/* the photo fold breaks out of the column — the strip needs the room */
+@media (min-width:601px){
+  .dbody-wide{margin-inline:calc((100% - min(92vw,62rem))/2)}
+  .dbody-wide .dpad{padding-left:0}
+  .dbody-wide .dpad::before{display:none}
+  .dbody-wide .dpad>p{max-width:34rem;margin-inline:auto}
+}
+.pgrid{display:flex;gap:8px;padding-top:.2rem;--h:300px;height:var(--h)}
+@media (min-width:60rem){ .pgrid{--h:360px} }
+.pgrid figure{position:relative;margin:0;flex:1 1 0%;min-width:8px;overflow:hidden;
+  border-radius:6px;cursor:pointer;background:var(--card);
+  opacity:0;transform:translateX(calc(var(--k)*94%));
+  transition:flex-grow .55s cubic-bezier(.22,1,.36,1),
+    flex-basis .55s cubic-bezier(.22,1,.36,1),
+    transform .65s cubic-bezier(.22,1,.36,1) var(--dd),
+    opacity .5s ease var(--dd)}
+.dbody.open .pgrid figure{opacity:1;transform:none}
+/* closing — the reverse: frames fly back to the centre (outermost first,
+   accelerating inward), then the fold itself folds up */
+.dbody.gathering .pgrid figure{opacity:0;transform:translateX(calc(var(--k)*94%));
+  transition:flex-grow .55s cubic-bezier(.22,1,.36,1),
+    flex-basis .55s cubic-bezier(.22,1,.36,1),
+    transform .5s cubic-bezier(.55,.06,.68,.19) calc(.55s - var(--dd)),
+    opacity .35s ease calc(.58s - var(--dd))}
+/* the open frame sizes to the photo's true aspect (--ar) — landscapes run wider,
+   the whole photo shows uncropped */
+.pgrid figure.on{flex:0 1 calc(var(--h)*var(--ar,.67))}
+.pgrid figure:nth-child(1){--k:3.5;--dd:.55s}
+.pgrid figure:nth-child(2){--k:2.5;--dd:.48s}
+.pgrid figure:nth-child(3){--k:1.5;--dd:.41s}
+.pgrid figure:nth-child(4){--k:.5;--dd:.34s}
+.pgrid figure:nth-child(5){--k:-.5;--dd:.34s}
+.pgrid figure:nth-child(6){--k:-1.5;--dd:.41s}
+.pgrid figure:nth-child(7){--k:-2.5;--dd:.48s}
+.pgrid figure:nth-child(8){--k:-3.5;--dd:.55s}
+.pgrid picture{position:absolute;inset:0}
+.pgrid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pgrid figcaption{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;
+  padding:1.6rem .65rem .55rem;font-size:.75rem;color:#F2EEE3;
+  background:linear-gradient(transparent,rgba(10,14,20,.78));
+  opacity:0;transform:translateY(5px);transition:opacity .35s ease,transform .35s ease}
+.pgrid figure.on figcaption{opacity:1;transform:none;transition-delay:.18s}
+.pgrid figcaption span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pgrid .film{font-family:"Space Mono",monospace;font-size:8.5px;letter-spacing:.16em;color:rgba(242,238,227,.72);flex:none}
+@media (max-width:600px){
+  .pgrid{flex-direction:column;height:min(74vh,32rem)}
+  .pgrid figure{transform:translateY(calc(var(--k)*94%))}
+  .pgrid figure.on{flex:5.5 1 0%}
+  .dbody.gathering .pgrid figure{transform:translateY(calc(var(--k)*94%))}
+}
+@media (prefers-reduced-motion:reduce){
+  .pgrid figure{opacity:1;transform:none;transition:none}
+}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;background:var(--lb);display:none;
@@ -318,16 +391,6 @@ footer{
 :root[data-theme="dark"] .clk .t{color:var(--ink)}
 .clk .t .co{color:var(--faint)}
 
-.ocean-line{margin:1.7rem 0 0;text-align:center;font-family:"Space Mono",monospace;
-  font-size:9.5px;letter-spacing:.1em;color:var(--faint);white-space:nowrap;overflow:hidden}
-.ocean-line b{color:var(--muted);font-weight:500}
-.ocean-line .sw{display:inline-block;color:var(--wave);opacity:.75}
-.ocean-line:hover .sw{animation:bob 1.2s ease-in-out infinite}
-.sw:nth-child(odd){animation-delay:.18s}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-@media (prefers-reduced-motion:reduce){ .ocean-line:hover .sw{animation:none} }
-.colo{margin-top:1.15rem;text-align:center;font-size:.75rem;color:var(--faint)}
-
 /* short screens — compress the between-group rhythm, keep the scale responsive */
 @media (max-height: 800px){
   .col{ padding-block: 1rem; }
@@ -345,7 +408,7 @@ footer{
   html{ font-size: 13px; }   /* one gentle step, not two */
 }
 </style>
-<noscript><style>.rv{opacity:1 !important;transform:none !important}.lit{background-size:100% 100% !important}</style></noscript>
+<noscript><style>.rv{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">skip to content</a>
@@ -358,10 +421,10 @@ footer{
     <div class="head-row">
       <div>
         <h1 class="name"><em>Jeremy Mitaux</em></h1>
-        <p class="updated">Updated July 29, 2026</p>
+        <p class="updated">Updated July 30, 2026</p>
       </div>
       <div class="mode">
-        <span class="mode-cap">LIGHT MODE</span>
+        <span class="mode-cap">BLUE MODE</span>
         <button class="mode-track" id="modeBtn" role="switch" aria-checked="false" aria-label="Toggle depth mode (dark theme)">
           <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M2.4 12h2.4M19.2 12h2.4M5 5l1.7 1.7M17.3 17.3l1.7 1.7M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
           <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.4A8 8 0 0 1 9.6 4 6.6 6.6 0 1 0 20 14.4Z"/></svg>
@@ -415,19 +478,17 @@ footer{
         <span class="dlabel" data-glitch>life in 50mm</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
-      <div class="dbody"><div class="dinner" id="d-photo" inert><div class="dpad">
-        <p style="margin-bottom:.8rem">Weekend mornings are Premier League mornings (YNWA). After that, weather permitting — and back home it always is — golf, the beach, or both. A Canon AE-1 comes along most days; an Olympus Stylus Zoom goes on backpacking trips because it fits in a pocket. Some favorites below — click any frame.</p>
+      <div class="dbody dbody-wide"><div class="dinner" id="d-photo" inert><div class="dpad">
+        <p style="margin-bottom:.8rem">The stock lens on the AE-1 is a prime 50mm f1.8. My favorite thing about this lens is the limitations it places on you. Want to zoom out? Use your feet. Moreover, it is said that the human eye sees somewhere between 40mm and 50mm. I like to think of this as the most human form of photography.</p>
         <div class="pgrid" id="pgrid">
-          <figure data-i="0"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="A packed Autzen Stadium crowd at University of Oregon graduation, sea of green gowns"/></picture><figcaption><span>Autzen, graduation day · Eugene</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="1"><picture><source type="image/webp" srcset="assets/photos/pont-neuf.webp"><img src="assets/photos/pont-neuf.jpg" width="1068" height="1600" loading="lazy" alt="Pont Neuf lit amber at night over the Seine"/></picture><figcaption><span>Pont Neuf, after dark · Paris</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="2"><picture><source type="image/webp" srcset="assets/photos/harbor-night.webp"><img src="assets/photos/harbor-night.jpg" width="1565" height="1037" loading="lazy" alt="Long-exposure light trails over a harbor at night in the south of France"/></picture><figcaption><span>Harbor, long exposure · France</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="3"><picture><source type="image/webp" srcset="assets/photos/empire-state.webp"><img src="assets/photos/empire-state.jpg" width="1068" height="1600" loading="lazy" alt="The Empire State Building at dusk, framed between dark silhouetted buildings"/></picture><figcaption><span>Empire State, dusk · New York</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="4"><picture><source type="image/webp" srcset="assets/photos/harbor-boats.webp"><img src="assets/photos/harbor-boats.jpg" width="1037" height="1565" loading="lazy" alt="Traditional wooden sailboats at golden hour in a French harbor"/></picture><figcaption><span>Wooden hulls, golden hour · France</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="5"><picture><source type="image/webp" srcset="assets/photos/oregon-fog.webp"><img src="assets/photos/oregon-fog.jpg" width="1067" height="1600" loading="lazy" alt="Fog and sunlight through tall fir trees in an Oregon forest"/></picture><figcaption><span>Fog in the firs · Oregon</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="6"><picture><source type="image/webp" srcset="assets/photos/central-park.webp"><img src="assets/photos/central-park.jpg" width="1600" height="1068" loading="lazy" alt="Manhattan skyline over cherry blossoms and rocks in Central Park"/></picture><figcaption><span>Skyline over the blossoms · New York</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="7"><picture><source type="image/webp" srcset="assets/photos/paris-balloon.webp"><img src="assets/photos/paris-balloon.jpg" width="1068" height="1600" loading="lazy" alt="A large white balloon rising over a garden path and wildflowers in Paris"/></picture><figcaption><span>Balloon over the hedges · Paris</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="8"><picture><source type="image/webp" srcset="assets/photos/silver-falls.webp"><img src="assets/photos/silver-falls.jpg" width="1600" height="1067" loading="lazy" alt="A waterfall pouring past mossy branches in an Oregon forest"/></picture><figcaption><span>Under the falls · Oregon</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="9"><picture><source type="image/webp" srcset="assets/photos/rodin-eiffel.webp"><img src="assets/photos/rodin-eiffel.jpg" width="1067" height="1600" loading="lazy" alt="A Rodin bronze between two conical hedges with the Eiffel Tower behind"/></picture><figcaption><span>Rodin garden, tower behind · Paris</span><span class="film">DIGITAL</span></figcaption></figure>
+          <figure data-i="0" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/san-juan.webp"><img src="assets/photos/san-juan.jpg" width="1024" height="1544" loading="lazy" alt="A white cottage with a shingle roof behind a picket fence and overgrown garden in San Juan Capistrano"/></picture><figcaption><span>Los Rios District · San Juan Capistrano</span><span class="film">35MM</span></figcaption></figure>
+          <figure data-i="1" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/tall-firs.webp"><img src="assets/photos/tall-firs.jpg" width="1067" height="1600" loading="lazy" alt="Morning light breaking through tall mossy firs in an Oregon forest"/></picture><figcaption><span>Silver Falls · Oregon</span><span class="film">DIGITAL</span></figcaption></figure>
+          <figure data-i="2" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/rodin.webp"><img src="assets/photos/rodin.jpg" width="1066" height="1600" loading="lazy" alt="Rodin's Three Shades between two conical hedges, the Eiffel Tower rising behind"/></picture><figcaption><span>Rodin garden · Paris</span><span class="film">DIGITAL</span></figcaption></figure>
+          <figure data-i="3" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-museum.webp"><img src="assets/photos/paris-museum.jpg" width="1067" height="1600" loading="lazy" alt="The Petit Palais gallery in late sun — frescoed vaults, rose marble columns, a winged bronze above the mosaic floor"/></picture><figcaption><span>Petit Palais · Paris</span><span class="film">DIGITAL</span></figcaption></figure>
+          <figure data-i="4" class="on" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-bridge.webp"><img src="assets/photos/paris-bridge.jpg" width="1068" height="1600" loading="lazy" alt="Pont Neuf lit amber at night over the Seine"/></picture><figcaption><span>Pont Neuf · Paris</span><span class="film">35MM</span></figcaption></figure>
+          <figure data-i="5" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/empire-state.webp"><img src="assets/photos/empire-state.jpg" width="1068" height="1600" loading="lazy" alt="The Empire State Building at dusk, framed between dark silhouetted towers"/></picture><figcaption><span>Empire State · New York</span><span class="film">35MM</span></figcaption></figure>
+          <figure data-i="6" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/el-nido.webp"><img src="assets/photos/el-nido.jpg" width="1024" height="1545" loading="lazy" alt="Limestone karsts and an outrigger boat ahead, seen from the deck of a bangka with a light leak haloing the frame"/></picture><figcaption><span>Island hopping · El Nido</span><span class="film">35MM</span></figcaption></figure>
+          <figure data-i="7" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/siargao.webp"><img src="assets/photos/siargao.jpg" width="1024" height="1545" loading="lazy" alt="Outrigger boats floating on turquoise reef water off a palm-lined shore in Siargao"/></picture><figcaption><span>Outriggers on the reef · Siargao</span><span class="film">35MM</span></figcaption></figure>
         </div>
       </div></div></div>
     </div>
@@ -491,7 +552,6 @@ footer{
       <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
       <span class="dlabel" data-glitch>writing &amp; research</span>
     </div>
-    <p class="wsub">Fund reports from the Oregon Blockchain Group's 25 ETH portfolio, and the essay Shakedown grew out of.</p>
     <ul class="wlist">
       <li class="wrow"><a class="t" href="reports_docs/Railgun%20Fund%20Report.pdf" target="_blank" rel="noopener">Railgun — $RAIL</a><span class="k">fund report · may 2026</span></li>
       <li class="wrow"><a class="t" href="reports_docs/Pendle%20Fund%20Report%20New.pdf" target="_blank" rel="noopener">Pendle — $PENDLE</a><span class="k">fund report · feb 2026</span></li>
@@ -510,13 +570,14 @@ footer{
       <ul class="soc" style="list-style:none;margin:0;padding:0">
         <li><a href="https://github.com/jeremymitaux" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .4 12a11.5 11.5 0 0 0 7.9 10.9c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.6 12 11.5 11.5 0 0 0 12 .5Z"/></svg></a></li>
         <li><a href="https://www.linkedin.com/in/jeremymitaux" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z"/></svg></a></li>
-        <li><a href="https://x.com/jeremymitaux" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L.9 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L6.4 3.9H4.6L17.7 20Z"/></svg></a></li>        <li><a href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.5 3 3 0 0 0 2.1 2.1C4.5 20 12 20 12 20s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.5ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg></a></li>
+        <li><a href="https://x.com/jeremymitaux" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L.9 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L6.4 3.9H4.6L17.7 20Z"/></svg></a></li>
+        <li><a href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.5 3 3 0 0 0 2.1 2.1C4.5 20 12 20 12 20s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.5ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg></a></li>
         <li><a href="mailto:jmitaux@gmail.com" aria-label="Email" title="jmitaux@gmail.com"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5zM4.5 5a.5.5 0 0 0-.5.5v.55l8 5.09 8-5.09V5.5a.5.5 0 0 0-.5-.5zM20 7.87l-7.46 4.75a1 1 0 0 1-1.08 0L4 7.87V18.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5z"/></svg></a></li>
       </ul>
       <p class="resume-line">get the one pager in my <a href="assets/mitaux_resume.pdf" target="_blank" rel="noopener">résumé</a>.</p>
       </div>
 
-      <div class="clocks" aria-label="">
+      <div class="clocks">
         <div class="clk"><span class="c">newport beach</span><span class="t" data-tz="America/Los_Angeles">--<span class="co">:</span>--<span class="co">:</span>--</span></div>
         <div class="clk"><span class="c">new york</span><span class="t" data-tz="America/New_York">--<span class="co">:</span>--<span class="co">:</span>--</span></div>
         <div class="clk"><span class="c">paris</span><span class="t" data-tz="Europe/Paris">--<span class="co">:</span>--<span class="co">:</span>--</span></div>
@@ -540,7 +601,8 @@ footer{
 (function(){
 "use strict";
 var root=document.documentElement;
-var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var prm=window.matchMedia('(prefers-reduced-motion: reduce)');
+var reduce=prm.matches;
 
 /* ── reveal ── */
 var rvs=[].slice.call(document.querySelectorAll('.rv'));
@@ -554,7 +616,7 @@ var metaTheme=document.getElementById('metaTheme');
 function syncMode(){
   var dark=root.dataset.theme==='dark';
   modeBtn.setAttribute('aria-checked',String(dark));
-  if(metaTheme) metaTheme.setAttribute('content',dark?'#0A1826':'#F4EFE3');
+  if(metaTheme) metaTheme.setAttribute('content',dark?'#0D1727':'#F5EEDA');
 }
 modeBtn.addEventListener('click',function(){
   var next=root.dataset.theme==='dark'?'light':'dark';
@@ -568,11 +630,26 @@ syncMode();
 [].slice.call(document.querySelectorAll('.dtrig')).forEach(function(btn){
   var inner=document.getElementById(btn.getAttribute('aria-controls'));
   var body=inner.parentElement;
+  var hasStrip=!!inner.querySelector('.pgrid');
+  var gatherT=null;
   btn.addEventListener('click',function(){
     var open=btn.getAttribute('aria-expanded')==='true';
     btn.setAttribute('aria-expanded',String(!open));
-    body.classList.toggle('open',!open);
-    if(open){ inner.setAttribute('inert',''); } else { inner.removeAttribute('inert'); }
+    if(!open){
+      clearTimeout(gatherT);
+      body.classList.remove('gathering');
+      body.classList.add('open');
+      inner.removeAttribute('inert');
+    }else{
+      inner.setAttribute('inert','');
+      if(hasStrip&&!prm.matches){
+        /* reverse of the opening — gather the frames to centre, then fold */
+        body.classList.add('gathering');
+        gatherT=setTimeout(function(){ body.classList.remove('open','gathering'); },620);
+      }else{
+        body.classList.remove('open');
+      }
+    }
   });
 });
 
@@ -620,10 +697,14 @@ function closeLb(){
   document.body.style.overflow='';
   if(lastFocus&&lastFocus.focus) lastFocus.focus();
 }
+/* expanding strip — hover/focus/tap opens a frame; activating the open frame goes full-size */
+function setShot(f){ figs.forEach(function(o){ o.classList.toggle('on',o===f); }); }
 figs.forEach(function(f,i){
   f.setAttribute('tabindex','0'); f.setAttribute('role','button');
   f.setAttribute('aria-label','View photo: '+shots[i].cap);
-  f.addEventListener('click',function(){openLb(i);});
+  f.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') setShot(f); });
+  f.addEventListener('focus',function(){ setShot(f); });
+  f.addEventListener('click',function(){ if(f.classList.contains('on')) openLb(i); else setShot(f); });
   f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(i);} });
 });
 document.getElementById('lbX').addEventListener('click',closeLb);
