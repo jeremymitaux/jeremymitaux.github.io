@@ -217,20 +217,22 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .hstage-inner{overflow:hidden;min-height:0}
 .hpanel{display:none}
 .hpanel.on{display:block}
-.hlist{list-style:none;margin:0;padding:.9rem 14px .4rem 2px;display:flex;flex-direction:column;gap:.65rem;
-  max-height:min(19rem,62vh);overflow-y:auto;overscroll-behavior:contain;
-  font-size:.875rem;line-height:1.55;color:var(--muted);
-  scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
-.hlist::-webkit-scrollbar{width:5px}
-.hlist::-webkit-scrollbar-track{background:transparent}
-.hlist::-webkit-scrollbar-thumb{background:var(--rule);border-radius:99px}
-.hquote{border-left:2px solid color-mix(in oklab,var(--coral) 35%,transparent);padding-left:.85rem}
+.hlist{list-style:none;margin:0;padding:.9rem 2px .4rem;display:flex;flex-direction:column;gap:.65rem;
+  font-size:.875rem;line-height:1.55;color:var(--muted)}
+/* two-up — quotes and listening stand side by side, so nothing scrolls inside the panel */
+.hcols{display:block;columns:2;column-gap:1.6rem}
+.hcols>li,.hcols .hgrp{break-inside:avoid;-webkit-column-break-inside:avoid}
+.hcols>li{margin:0 0 .85rem}
+.hgrp{margin:0 0 1.05rem}
+.hgrp:last-child{margin-bottom:0}
+.hgrp ul{list-style:none;margin:.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+@media (max-width:560px){ .hcols{columns:1} .hcols>li:last-child{margin-bottom:0} }
+.hquote{border-left:2px solid color-mix(in oklab,var(--coral) 35%,transparent);padding-left:.8rem}
 .hquote .by{display:block;margin-top:3px;font-style:italic;color:var(--faint)}
 .hlist .ti{font-family:var(--font-display);font-style:italic;color:var(--head)}
 :root[data-theme="dark"] .hlist .ti{color:var(--ink)}
 .hgroup{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--faint);margin-top:.4rem}
-.hgroup:first-child{margin-top:0}
+  color:var(--faint);margin:0}
 
 /* ═══════════ WRITING ═══════════ */
 .wsec{margin-top:1.7rem}
@@ -590,29 +592,41 @@ footer{
     </div>
     <div class="hstage" id="hstage"><div class="hstage-inner" id="hstageInner" inert>
       <div class="hpanel" id="hp-q" role="tabpanel" aria-labelledby="ht-q">
-        <ul class="hlist">
+        <ul class="hlist hcols">
           <li class="hquote">“Climb the mountain not so the world can see you, but so you can see the world.”<span class="by">David McCullough Jr.</span></li>
           <li class="hquote">“And now that you don't have to be perfect, you can be good.”<span class="by">John Steinbeck, East of Eden</span></li>
           <li class="hquote">“You make my world so much bigger and I'm wondering if I do the same for you.”<span class="by">Celine Song, Past Lives</span></li>
           <li class="hquote">“If you don't have the right people around you, and your mind is moving a million mph, you'll lose yourself.”<span class="by">Dave Chappelle</span></li>
           <li class="hquote">“The right code won't run with the wrong .env file.”<span class="by">@javiercunat</span></li>
-          <li class="hquote">"Love takes miles." <span class="by">Cameron Winter</span></li>
+          <li class="hquote">“Love takes miles.”<span class="by">Cameron Winter</span></li>
         </ul>
       </div>
       <div class="hpanel" id="hp-a" role="tabpanel" aria-labelledby="ht-a">
-        <ul class="hlist">
-          <li class="hgroup" aria-hidden="true">my desert island collection</li>
-          <li><span class="ti">Europe ’72</span>, Grateful Dead</li>
-          <li><span class="ti">Toys In The Attic</span>, Aerosmith</li>
-          <li><span class="ti">Live on Red Barn Radio I & II</span>, Tyler Childers</li>
-          <li><span class="ti">Two Star & The Dream Police </span>, Mk.gee</li>
-          <li><span class="ti">Is This It?</span>, The Strokes</li>
-          <li class="hgroup" aria-hidden="true">podcasts</li>
-          <li>The <span class="ti">Blockworks</span> feed, most mornings</li>
-          <li class="hgroup" aria-hidden="true">films</li>
-          <li><span class="ti">About Time</span>, Richard Curtis</li>
-          <li><span class="ti">The Before Trilogy</span>, Richard Linklater</li>
-        </ul>
+        <div class="hlist hcols">
+          <section class="hgrp" aria-labelledby="hg-records">
+            <p class="hgroup" id="hg-records">my desert island collection</p>
+            <ul>
+              <li><span class="ti">Europe ’72</span>, Grateful Dead</li>
+              <li><span class="ti">Toys In The Attic</span>, Aerosmith</li>
+              <li><span class="ti">Live on Red Barn Radio I &amp; II</span>, Tyler Childers</li>
+              <li><span class="ti">Two Star &amp; The Dream Police</span>, Mk.gee</li>
+              <li><span class="ti">Is This It</span>, The Strokes</li>
+            </ul>
+          </section>
+          <section class="hgrp" aria-labelledby="hg-pods">
+            <p class="hgroup" id="hg-pods">podcasts</p>
+            <ul>
+              <li>The <span class="ti">Blockworks</span> feed, most mornings</li>
+            </ul>
+          </section>
+          <section class="hgrp" aria-labelledby="hg-films">
+            <p class="hgroup" id="hg-films">films</p>
+            <ul>
+              <li><span class="ti">About Time</span>, Richard Curtis</li>
+              <li><span class="ti">The Before Trilogy</span>, Richard Linklater</li>
+            </ul>
+          </section>
+        </div>
       </div>
       <div class="hpanel" id="hp-b" role="tabpanel" aria-labelledby="ht-b">
         <ul class="hlist">
