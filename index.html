@@ -27,8 +27,8 @@
 <meta name="twitter:description" content="Building Shakedown from Manila. One signal, one ocean." />
 <meta name="twitter:image" content="assets/media/portrait.jpg" />
 
-<link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="favicon.svg" />
+<link rel="icon" href="fleur-de-lis-1-svgrepo-com.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="fleur-de-lis-1-svgrepo-com.svg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -341,6 +341,58 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   .pgrid figure{opacity:1;transform:none;transition:none}
 }
 
+/* ═══════════ HENRY'S UNCLE — the band, in the 50mm fold ═══════════
+   intro row (copy + listen buttons, EP cover at right), then two
+   counter-drifting film strips — vanilla port of framer-motion's
+   scroll-velocity marquee: rows drift on their own, page scroll lends
+   its momentum, scrolling up swings the drift the other way. on fold
+   open/close the tiles gather at each row's centre and shoot out like
+   the photo strip above — --k/--dd are measured per-tile in JS. */
+.dpad .hu-name{margin-top:1.35rem;text-align:center;font-family:var(--font-display);font-style:italic;
+  font-size:1.06rem;color:var(--head)}
+:root[data-theme="dark"] .dpad .hu-name{color:var(--ink)}
+.dpad .hu-tag{margin-top:.2rem;text-align:center;font-size:.8125rem;color:var(--faint)}
+.hu-intro{display:flex;align-items:flex-start;gap:1.4rem;max-width:34rem;margin:.85rem auto 0}
+.hu-copy{flex:1;min-width:0}
+.hu-ep{flex:none;width:min(34%,10.5rem);margin:0}
+.hu-ep img{border-radius:6px;background:var(--card)}
+.hu-ep figcaption{margin-top:5px;text-align:center;font-family:"Space Mono",monospace;font-size:8.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.hu-links{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.9rem}
+.hu-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.48rem 1rem;
+  border:1px solid var(--rule);border-radius:999px;
+  font-size:.8125rem;font-weight:600;color:var(--head);text-decoration:none;
+  transition:color .2s ease,border-color .2s ease,transform .2s ease}
+:root[data-theme="dark"] .hu-btn{color:var(--ink)}
+.hu-btn svg{width:15px;height:15px;flex:none}
+.hu-btn:hover{color:var(--coral-deep);border-color:var(--coral);transform:translateY(-1px)}
+.hu{margin-top:1rem}
+.hu-mq{position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}
+.hu-mq+.hu-mq{margin-top:8px}
+.hu-track{display:flex;flex-wrap:nowrap;width:max-content;will-change:transform}
+/* spacing lives on the tile, not flex gap — the wrap point at half the
+   track only lands on a seam if each sequence copy is an exact width */
+.hu-tile{position:relative;flex:none;margin:0 8px 0 0;height:clamp(7.25rem,17vw,10.5rem);
+  border-radius:6px;overflow:hidden;background:var(--card);
+  opacity:0;transform:translateX(calc(var(--k,0)*94%));
+  transition:transform .65s cubic-bezier(.22,1,.36,1) var(--dd,.3s),opacity .5s ease var(--dd,.3s)}
+.dbody.open .hu-tile{opacity:1;transform:none}
+.dbody.gathering .hu-tile{opacity:0;transform:translateX(calc(var(--k,0)*94%));
+  transition:transform .5s cubic-bezier(.55,.06,.68,.19) calc(.55s - var(--dd,.3s)),
+    opacity .35s ease calc(.58s - var(--dd,.3s))}
+.hu-tile img,.hu-tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:600px){
+  .hu-intro{flex-direction:column;align-items:center}
+  .hu-copy{width:100%}
+  .hu-ep{width:min(60%,12rem)}
+  .hu-links{justify-content:center}
+  .hu{margin-inline:-1.5rem}
+}
+@media (min-width:481px) and (max-width:600px){ .hu{margin-left:calc(-1.5rem - 24px)} }
+@media (prefers-reduced-motion:reduce){ .hu-tile{opacity:1;transform:none;transition:none} }
+
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;background:var(--lb);display:none;
   align-items:center;justify-content:center;flex-direction:column;padding:3.2rem 1rem 2.4rem}
@@ -421,7 +473,7 @@ footer{
     <div class="head-row">
       <div>
         <h1 class="name"><em>Jeremy Mitaux</em></h1>
-        <p class="updated">Updated July 30, 2026</p>
+        <p class="updated">Updated August 4, 2026</p>
       </div>
       <div class="mode">
         <span class="mode-cap">BLUE MODE</span>
@@ -443,12 +495,12 @@ footer{
 
     <div>
       <button class="dtrig" aria-expanded="false" aria-controls="d-oregon">
-        <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
+        <svg class="wv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10L12 5L3 10L6 11.6667M21 10L18 11.6667M21 10V10C21.6129 10.3064 22 10.9328 22 11.618V16.9998M6 11.6667L12 15L18 11.6667M6 11.6667V17.6667L12 21L18 17.6667L18 11.6667"/></svg>
         <span class="dlabel" data-glitch>at Oregon</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
       <div class="dbody"><div class="dinner" id="d-oregon" inert><div class="dpad">
-        <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026 · olympus stylus zoom · 35mm</figcaption></figure>
+        <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026</figcaption></figure>
         <p>I received my B.S. in Data Science from the University of Oregon in 2026, where I served as Director of Venture Capital for the Oregon Blockchain Group and External VP of Chi Psi Fraternity.</p>
         <p>I'm interested in how emerging technologies reshape institutions, markets, and ultimately how they affect the human experience. That question feels like the defining challenge of this century.</p>
       </div></div></div>
@@ -456,14 +508,13 @@ footer{
 
     <div>
       <button class="dtrig" aria-expanded="false" aria-controls="d-built">
-        <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
+        <svg class="wv" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.13861 8.5856C3.10395 8.79352 3.07799 8.98444 3.05852 9.15412C2.89911 9.20305 2.72733 9.2683 2.55279 9.35557C2.18416 9.53989 1.78511 9.83206 1.48045 10.2891C1.17162 10.7523 1 11.325 1 12C1 12.675 1.17162 13.2477 1.48045 13.7109C1.78511 14.1679 2.18416 14.4601 2.55279 14.6444C2.72733 14.7317 2.89911 14.7969 3.05852 14.8459C3.07798 15.0156 3.10395 15.2065 3.13861 15.4144C3.27452 16.2299 3.54822 17.3325 4.10557 18.4472C4.66489 19.5658 5.51956 20.7149 6.8203 21.5821C8.1273 22.4534 9.82502 23 12 23C14.175 23 15.8727 22.4534 17.1797 21.5821C18.4804 20.7149 19.3351 19.5658 19.8944 18.4472C20.4518 17.3325 20.7255 16.2299 20.8614 15.4144C20.896 15.2065 20.922 15.0156 20.9415 14.8459C21.1009 14.7969 21.2727 14.7317 21.4472 14.6444C21.8158 14.4601 22.2149 14.1679 22.5196 13.7109C22.8284 13.2477 23 12.675 23 12C23 11.325 22.8284 10.7523 22.5196 10.2891C22.2149 9.83206 21.8158 9.53989 21.4472 9.35557C21.2727 9.2683 21.1009 9.20305 20.9415 9.15412C20.922 8.98444 20.896 8.79352 20.8614 8.5856C20.7255 7.77011 20.4518 6.6675 19.8944 5.55278C19.3351 4.43416 18.4804 3.28511 17.1797 2.41795C15.8727 1.54662 14.175 1 12 1C9.82502 1 8.1273 1.54662 6.8203 2.41795C5.51957 3.28511 4.66489 4.43416 4.10558 5.55279C3.54822 6.6675 3.27452 7.77011 3.13861 8.5856ZM18.9025 15H5.09753C5.20639 15.692 5.43305 16.63 5.89443 17.5528C6.33511 18.4342 6.98044 19.2851 7.9297 19.9179C8.8727 20.5466 10.175 21 12 21C13.825 21 15.1273 20.5466 16.0703 19.9179C17.0196 19.2851 17.6649 18.4342 18.1056 17.5528C18.5669 16.63 18.7936 15.692 18.9025 15ZM18.9025 9H18C17.4477 9 17 9.44771 17 10C17 10.5523 17.4477 11 18 11H20C20.3084 11.012 20.6759 11.1291 20.8554 11.3984C20.9216 11.4977 21 11.675 21 12C21 12.325 20.9216 12.5023 20.8554 12.6016C20.6759 12.8709 20.3084 12.988 20 13H4C3.69155 12.988 3.32414 12.8709 3.14455 12.6016C3.07838 12.5023 3 12.325 3 12C3 11.675 3.07838 11.4977 3.14455 11.3984C3.32414 11.1291 3.69155 11.012 4 11H6C6.55228 11 7 10.5523 7 10C7 9.44771 6.55228 9 6 9H5.09753C5.20639 8.30804 5.43306 7.36996 5.89443 6.44721C6.33512 5.56584 6.98044 4.71489 7.92971 4.08205C8.24443 3.87224 8.59917 3.68195 9 3.52152V6C9 6.55228 9.44771 7 10 7C10.5523 7 11 6.55228 11 6V3.04872C11.3146 3.01691 11.6476 3 12 3C12.3524 3 12.6854 3.01691 13 3.04872V6C13 6.55228 13.4477 7 14 7C14.5523 7 15 6.55228 15 6V3.52152C15.4008 3.68195 15.7556 3.87224 16.0703 4.08205C17.0196 4.71489 17.6649 5.56584 18.1056 6.44721C18.5669 7.36996 18.7936 8.30804 18.9025 9Z"/></svg>
         <span class="dlabel" data-glitch>building</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
       <div class="dbody"><div class="dinner" id="d-built" inert><div class="dpad">
         <ul class="roster">
           <li><span class="nm">Shakedown</span> <span class="sep">·</span> on-chain ticketing for independent music venues. Four years of fronting a band taught me that a single gig is dozens of handshake agreements; Shakedown writes them into the ticket — resale conditions the venue sets, QR check-in at the door, payment splits enforced in hardware, hybrid NFTs that keep working after the show. It won Best Use Case of Solana at QuackHacks III and reached the finals of Ledger's N3XT Build &amp; Show; Ledger later invited me on a podcast to walk through the build. The current build: Next.js and TypeScript, Supabase, Anchor contracts in Rust, Metaplex Core, Privy embedded wallets.</li>
-          <li><span class="nm">Henry's Uncle</span> <span class="sep">·</span> the greatest band you've never heard of. A three-piece power trio through college — 30-plus shows booked, promoted, and played, with a radio show along the way. Two self-produced releases, and a third in the works. On <a href="https://open.spotify.com/search/Henry's%20Uncle" target="_blank" rel="noopener">Spotify</a>, with more on <a href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener">YouTube</a>.</li>
         </ul>
       </div></div></div>
     </div>
@@ -474,7 +525,7 @@ footer{
 
     <div>
       <button class="dtrig" aria-expanded="false" aria-controls="d-photo">
-        <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
+        <svg class="wv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z"/><path d="M3 16.8V9.2C3 8.0799 3 7.51984 3.21799 7.09202C3.40973 6.71569 3.71569 6.40973 4.09202 6.21799C4.51984 6 5.0799 6 6.2 6H7.25464C7.37758 6 7.43905 6 7.49576 5.9935C7.79166 5.95961 8.05705 5.79559 8.21969 5.54609C8.25086 5.49827 8.27836 5.44328 8.33333 5.33333C8.44329 5.11342 8.49827 5.00346 8.56062 4.90782C8.8859 4.40882 9.41668 4.08078 10.0085 4.01299C10.1219 4 10.2448 4 10.4907 4H13.5093C13.7552 4 13.8781 4 13.9915 4.01299C14.5833 4.08078 15.1141 4.40882 15.4394 4.90782C15.5017 5.00345 15.5567 5.11345 15.6667 5.33333C15.7216 5.44329 15.7491 5.49827 15.7803 5.54609C15.943 5.79559 16.2083 5.95961 16.5042 5.9935C16.561 6 16.6224 6 16.7454 6H17.8C18.9201 6 19.4802 6 19.908 6.21799C20.2843 6.40973 20.5903 6.71569 20.782 7.09202C21 7.51984 21 8.0799 21 9.2V16.8C21 17.9201 21 18.4802 20.782 18.908C20.5903 19.2843 20.2843 19.5903 19.908 19.782C19.4802 20 18.9201 20 17.8 20H6.2C5.0799 20 4.51984 20 4.09202 19.782C3.71569 19.5903 3.40973 19.2843 3.21799 18.908C3 18.4802 3 17.9201 3 16.8Z"/></svg>
         <span class="dlabel" data-glitch>life in 50mm</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
@@ -489,6 +540,37 @@ footer{
           <figure data-i="5" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/empire-state.webp"><img src="assets/photos/empire-state.jpg" width="1068" height="1600" loading="lazy" alt="The Empire State Building at dusk, framed between dark silhouetted towers"/></picture><figcaption><span>Empire State · New York</span><span class="film">35MM</span></figcaption></figure>
           <figure data-i="6" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/el-nido.webp"><img src="assets/photos/el-nido.jpg" width="1024" height="1545" loading="lazy" alt="Limestone karsts and an outrigger boat ahead, seen from the deck of a bangka with a light leak haloing the frame"/></picture><figcaption><span>Island hopping · El Nido</span><span class="film">35MM</span></figcaption></figure>
           <figure data-i="7" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/siargao.webp"><img src="assets/photos/siargao.jpg" width="1024" height="1545" loading="lazy" alt="Outrigger boats floating on turquoise reef water off a palm-lined shore in Siargao"/></picture><figcaption><span>Outriggers on the reef · Siargao</span><span class="film">35MM</span></figcaption></figure>
+        </div>
+        <p class="hu-name">Henry's Uncle</p>
+        <p class="hu-tag">the greatest band you've never heard of</p>
+        <div class="hu-intro">
+          <div class="hu-copy">
+            <p>A three-piece power trio through college — 30-plus shows booked, promoted, and played, with a radio show along the way. Two self-produced releases, and a third in the works.</p>
+            <div class="hu-links">
+              <a class="hu-btn" href="https://open.spotify.com/search/Henry's%20Uncle" target="_blank" rel="noopener" aria-label="Henry's Uncle on Spotify"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a>
+              <a class="hu-btn" href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener" aria-label="Jeremy's YouTube channel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.5 3 3 0 0 0 2.1 2.1C4.5 20 12 20 12 20s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.5ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg>YouTube</a>
+            </div>
+          </div>
+          <figure class="hu-ep"><picture><source type="image/webp" srcset="assets/media/hu/hu-cover.webp"><img src="assets/media/hu/hu-cover.jpg" width="640" height="640" loading="lazy" alt="Henry's Uncle EP cover"/></picture><figcaption>the ep · self-produced</figcaption></figure>
+        </div>
+        <div class="hu" id="huMq" role="group" aria-label="Henry's Uncle, on the ground">
+          <div class="hu-mq" data-v="42">
+            <div class="hu-track">
+              <figure class="hu-tile" style="aspect-ratio:960/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-backyard-set.webp"><img src="assets/media/hu/hu-backyard-set.jpg" width="960" height="640" loading="lazy" alt="Mid-set at a backyard house show, string lights overhead"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:640/360"><video src="assets/media/hu/hu-pov.mp4" poster="assets/media/hu/hu-pov-poster.jpg" muted loop playsinline preload="metadata" aria-label="From the stage: the yard packed under string lights"></video></figure>
+              <figure class="hu-tile" style="aspect-ratio:960/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-backyard-crowd.webp"><img src="assets/media/hu/hu-backyard-crowd.jpg" width="960" height="640" loading="lazy" alt="The crowd dancing at a backyard show"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:426/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-rail-2.webp"><img src="assets/media/hu/hu-rail-2.jpg" width="426" height="640" loading="lazy" alt="Band portrait on a stairwell, close"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:960/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-lawn-show.webp"><img src="assets/media/hu/hu-lawn-show.jpg" width="960" height="640" loading="lazy" alt="An outdoor afternoon set under a lighting truss"/></picture></figure>
+            </div>
+          </div>
+          <div class="hu-mq" data-v="-42">
+            <div class="hu-track">
+              <figure class="hu-tile" style="aspect-ratio:640/360"><video src="assets/media/hu/hu-pov.mp4" poster="assets/media/hu/hu-pov-poster.jpg" muted loop playsinline preload="metadata" aria-label="From the stage: the yard packed under string lights"></video></figure>
+              <figure class="hu-tile" style="aspect-ratio:956/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-kwva.webp"><img src="assets/media/hu/hu-kwva.jpg" width="956" height="640" loading="lazy" alt="Live on air at KWVA Eugene 88.1 FM"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:426/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-bleachers.webp"><img src="assets/media/hu/hu-bleachers.jpg" width="426" height="640" loading="lazy" alt="The three-piece on the bleachers between shows"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:960/640"><picture><source type="image/webp" srcset="assets/media/hu/hu-rail-1.webp"><img src="assets/media/hu/hu-rail-1.jpg" width="960" height="640" loading="lazy" alt="Band portrait on a stairwell"/></picture></figure>
+            </div>
+          </div>
         </div>
       </div></div></div>
     </div>
@@ -509,7 +591,7 @@ footer{
     <div class="hstage" id="hstage"><div class="hstage-inner" id="hstageInner" inert>
       <div class="hpanel" id="hp-q" role="tabpanel" aria-labelledby="ht-q">
         <ul class="hlist">
-          <li class="hquote">“You do not merely want to be considered just the best of the best. You want to be considered the only ones who do what you do.”<span class="by">Jerry Garcia</span></li>
+          <li class="hquote">“Climb the mountain not so the world can see you, but so you can see the world.”<span class="by">David McCullough Jr.</span></li>
           <li class="hquote">“And now that you don't have to be perfect, you can be good.”<span class="by">John Steinbeck, East of Eden</span></li>
           <li class="hquote">“You make my world so much bigger and I'm wondering if I do the same for you.”<span class="by">Celine Song, Past Lives</span></li>
           <li class="hquote">“If you don't have the right people around you, and your mind is moving a million mph, you'll lose yourself.”<span class="by">Dave Chappelle</span></li>
@@ -549,7 +631,7 @@ footer{
   <!-- ── writing & research ── -->
   <section class="rv wsec" style="transition-delay:.26s" aria-label="Writing and research">
     <div class="whead">
-      <svg class="wv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 13 H6 C8.5 13 10 11.5 11.5 9.5 C13 7.5 13.5 5.5 12 4.5 C10.8 3.7 9.5 4.6 9.8 6 C10 7.2 11.2 7.6 12.2 7.2 M13.5 13 H15"/></svg>
+      <svg class="wv" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M275.602,346.18c0-155.063,47.628-176.776,47.628-238.215c0-54.614-38.926-93.177-67.23-107.964c-28.305,14.788-67.239,53.351-67.239,107.964c0,61.44,47.628,83.152,47.628,238.215H275.602z"/><path d="M185.388,346.18h31.359c0,0,6.547-141.584-81.028-161.194c-90.055-20.155-128.082,107.178-57.51,149C84.75,239.886,185.388,246.418,185.388,346.18z"/><path d="M376.278,184.985c-87.567,19.61-81.036,161.194-81.036,161.194h31.367c0-99.762,100.638-106.294,107.178-12.194C504.367,292.163,466.332,164.83,376.278,184.985z"/><polygon points="131.833,356.204 131.833,386.262 255.999,386.262 380.171,386.262 380.171,356.204 255.999,356.204"/><path d="M278.217,395.674h-44.445c0,18.303-23.519,50.977-60.118,52.278c0,22.226,42.956,29.196,57.857,19.611c0,0-1.656,33.982,24.487,44.437c26.142-10.456,24.487-44.437,24.487-44.437c14.901,9.585,57.856,2.616,57.856-19.611C301.744,446.652,278.217,413.977,278.217,395.674z"/></svg>
       <span class="dlabel" data-glitch>writing &amp; research</span>
     </div>
     <ul class="wlist">
@@ -717,6 +799,112 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='ArrowLeft') show(cur-1);
   else if(e.key==='ArrowRight') show(cur+1);
 });
+
+/* ── on the ground — scroll-velocity marquee (50mm fold) ──
+   port of the framer-motion strip: baseX drifts each frame; scrollY
+   velocity is spring-smoothed into a factor that scales the drift
+   and flips its direction when you scroll up. content is cloned in
+   whole-sequence pairs so the wrap at half the track lands on a seam. */
+(function(){
+  var host=document.getElementById('huMq');
+  if(!host) return;
+  var GAP=8;
+  var rows=[].slice.call(host.querySelectorAll('.hu-mq'));
+  var visible=false;
+  function vids(){ return [].slice.call(host.querySelectorAll('video')); }
+  function playPause(){
+    vids().forEach(function(v){
+      if(visible&&!reduce){ v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else v.pause();
+    });
+  }
+  if('IntersectionObserver' in window){
+    /* the closed fold collapses to zero height, so IO doubles as an
+       open/closed sensor — but zero-area targets still report
+       intersecting when their point sits in the viewport, so require
+       real height too. IO re-fires on the fold's own resize. */
+    new IntersectionObserver(function(es){
+      var e=es[0];
+      visible=e.isIntersecting&&e.boundingClientRect.height>0;
+      playPause();
+    }).observe(host);
+  }else{ visible=true; playPause(); }
+  if(reduce) return;
+
+  var state=rows.map(function(row){
+    return {row:row,track:row.querySelector('.hu-track'),
+            seq:[].slice.call(row.querySelectorAll('.hu-tile')),
+            copies:1,half:0,x:0,dir:1,v:parseFloat(row.dataset.v)||40};
+  });
+  function ensure(s){
+    var seqW=0;
+    s.seq.forEach(function(t){ seqW+=t.offsetWidth+GAP; });
+    if(!seqW) return;
+    /* half the track must cover the row plus one sequence of slack */
+    var target=Math.ceil(2*(s.row.clientWidth+seqW)/seqW);
+    if(target%2) target++;
+    while(s.copies<target){
+      s.seq.forEach(function(t){
+        var c=t.cloneNode(true);
+        c.setAttribute('aria-hidden','true');
+        s.track.appendChild(c);
+      });
+      s.copies++;
+    }
+    s.half=s.copies*seqW/2;
+  }
+  /* fold entrance — measure each on-screen tile's distance from its
+     row's centre into --k (own-widths) and a stagger --dd, so opening
+     shoots the tiles out from the middle and closing gathers them
+     back, like the photo strip above. off-screen tiles just fade. */
+  function setK(){
+    state.forEach(function(s){
+      var w=s.row.clientWidth, mid=w/2;
+      [].slice.call(s.track.children).forEach(function(t){
+        var l=t.offsetLeft+s.x, tw=t.offsetWidth, k=0, dd=0;
+        if(tw&&l<w&&l+tw>0){
+          k=(mid-(l+tw/2))/tw;
+          dd=Math.min(.3+.07*Math.abs(k),.55);
+        }
+        t.style.setProperty('--k',k.toFixed(2));
+        t.style.setProperty('--dd',dd.toFixed(2)+'s');
+      });
+    });
+  }
+  function layout(){ state.forEach(ensure); setK(); playPause(); }
+  layout();
+  var rzT; window.addEventListener('resize',function(){ clearTimeout(rzT); rzT=setTimeout(layout,150); });
+  /* the track drifts while open, so re-measure the gather targets the
+     moment the fold starts closing */
+  var dbody=host.closest('.dbody');
+  if(dbody&&'MutationObserver' in window){
+    new MutationObserver(function(){
+      if(dbody.classList.contains('gathering')) setK();
+    }).observe(dbody,{attributes:true,attributeFilter:['class']});
+  }
+
+  function mod(a,n){ return ((a%n)+n)%n; }
+  var lastT=0,lastY=window.scrollY,sv=0;
+  function frame(t){
+    requestAnimationFrame(frame);
+    if(!lastT){ lastT=t; return; }
+    var dt=Math.min(t-lastT,64)/1000; lastT=t;
+    if(dt<=0) return;
+    var y=window.scrollY;
+    sv+=((y-lastY)/dt-sv)*(1-Math.exp(-dt*3)); lastY=y;
+    if(!visible) return;
+    var vf=sv/2000; /* 10,000 px/s of scroll ≙ 5× drift, unclamped */
+    state.forEach(function(s){
+      if(!s.half) return;
+      if(vf<0) s.dir=-1; else if(vf>0) s.dir=1;
+      var move=s.dir*s.v*dt;
+      move+=s.dir*move*vf;
+      s.x=-mod(-(s.x+move),s.half);
+      s.track.style.transform='translate3d('+s.x+'px,0,0)';
+    });
+  }
+  requestAnimationFrame(frame);
+})();
 
 /* ── interlude tabs — the record ── */
 (function(){
