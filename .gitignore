@@ -11,3 +11,6 @@ index copy 2.html
 *.swo
 Thumbs.db
 index.original.html
+
+# raw brand kit — full licensed font families, do not publish
+shakedown-brand/

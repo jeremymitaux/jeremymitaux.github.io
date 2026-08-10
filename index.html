@@ -193,11 +193,122 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 :root[data-theme="dark"] .dpad a{color:var(--ink)}
 .dpad a:hover{color:var(--coral-deep)}
 
-/* built roster */
-.roster{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.8rem}
-.roster .nm{font-weight:600;color:var(--head)}
-:root[data-theme="dark"] .roster .nm{color:var(--ink)}
-.roster .sep{color:var(--faint)}
+/* ═══════════ SHAKEDOWN — the premiere in the building fold ═══════════
+   a two-column showcase: lede (lockup, copy, CTAs) beside a compact
+   tabbed media panel. the lockup's type rises from behind a crop line;
+   the panel scales in behind it; everything is gated on .dbody.open /
+   .dbody.gathering and the close runs the cascade backwards.
+   (the old single-line .roster lived here until 2026-08-08; the
+   full-bleed brand plate + laurel cards until 2026-08-10 — the plate
+   ate too much column, the laurels read as chips. honors now live in
+   the prose; the brand lives in the lockup and the media panel.)       */
+/* brand fonts — self-hosted, referenced only inside the fold, so the
+   browser never fetches them until the fold's markup paints */
+@font-face{font-family:"Centrion";src:url("assets/shakedown/fonts/Centrion-Regular.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Switzer";src:url("assets/shakedown/fonts/Switzer-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Switzer";src:url("assets/shakedown/fonts/Switzer-Medium.woff2") format("woff2");font-weight:500;font-display:swap}
+.sk{--sk-cream:#EDE7D9;--sk-orange:#A65A42;--sk-plum:#5B405F;--sk-black:#272113;
+  display:grid;gap:1.5rem}
+@media (min-width:60rem){ .sk{grid-template-columns:1.12fr 1fr;gap:2.2rem;align-items:center} }
+
+/* ── the lede — eyebrow, lockup, prose, CTAs ── */
+.sk-line{display:block;overflow:hidden}          /* the crop line the type rises from */
+.sk-line>span{display:block;transform:translateY(114%);
+  transition:transform .8s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+.dbody.open .sk-line>span{transform:none}
+.sk-eyebrow{font-family:"Switzer",var(--font-body);font-weight:500;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sk-orange)}
+:root[data-theme="dark"] .sk-eyebrow{color:#CE8A5F}
+.sk-line>span.sk-lock{display:flex;align-items:center;gap:.65rem;margin-top:.4rem}
+.sk-mark{width:clamp(34px,4vw,42px);height:auto;border-radius:4px;flex:none}
+/* Centrion leaves its descender space empty — nudge the word down so its
+   visual mass centres on the mark beside it */
+.sk-word{font-family:"Centrion",var(--font-display);font-size:clamp(1.9rem,4.4vw,2.5rem);line-height:1.1;
+  color:var(--sk-black);padding-top:.12em;padding-bottom:.05em}
+:root[data-theme="dark"] .sk-word{color:var(--sk-cream)}
+.sk-copy{margin-top:.8rem;max-width:34rem}
+/* ── the phases — click a title, the panel follows ── */
+.sk-steps{margin-top:.9rem;max-width:34rem;border-top:1px solid var(--rule);
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s ease .36s,transform .55s cubic-bezier(.22,1,.36,1) .36s}
+.dbody.open .sk-steps{opacity:1;transform:none}
+.sk-step{border-bottom:1px solid var(--rule)}
+.sk-step-t{display:flex;width:100%;align-items:center;gap:.6rem;padding:.6rem 2px;cursor:pointer;
+  text-align:left;font-family:"Switzer",var(--font-body);font-weight:500;font-size:.875rem;
+  color:var(--head);transition:color .2s ease}
+:root[data-theme="dark"] .sk-step-t{color:var(--ink)}
+.sk-step-t:hover{color:var(--sk-orange)}
+.sk-step-n{font-size:10px;letter-spacing:.08em;color:var(--faint);flex:none;transition:color .2s ease}
+.sk-step-t .chev{width:9px;height:9px;color:var(--faint);margin-left:auto;flex:none;transition:transform .3s ease}
+.sk-step.on .sk-step-t{color:var(--sk-orange)}
+.sk-step.on .sk-step-n{color:var(--sk-orange)}
+.sk-step.on .chev{transform:rotate(90deg)}
+:root[data-theme="dark"] .sk-step-t:hover,
+:root[data-theme="dark"] .sk-step.on .sk-step-t,
+:root[data-theme="dark"] .sk-step.on .sk-step-n{color:#CE8A5F}
+.sk-step-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s cubic-bezier(.22,1,.36,1)}
+.sk-step.on .sk-step-b{grid-template-rows:1fr}
+.sk-step-in{overflow:hidden;min-height:0}
+.sk-step-in p{padding:.05rem 0 .7rem;font-size:.8438rem}
+.sk-ctas{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s ease .42s,transform .55s cubic-bezier(.22,1,.36,1) .42s}
+.dbody.open .sk-ctas{opacity:1;transform:none}
+/* brand buttons — the orange rectangle from the sign-up cards, softened a notch.
+   written as .sk a.sk-btn to outrank the .dpad link underline styles */
+.sk a.sk-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem 1.05rem;border-radius:7px;
+  background:var(--sk-orange);color:#F4EDE0;text-decoration:none;
+  font-family:"Switzer",var(--font-body);font-weight:500;font-size:.8125rem;letter-spacing:.02em;
+  transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.sk a.sk-btn:hover{background:color-mix(in oklab,var(--sk-orange) 86%,#000);color:#F4EDE0;transform:translateY(-1px)}
+.sk a.sk-btn svg{width:12px;height:12px;flex:none;transition:transform .25s ease}
+.sk a.sk-btn:hover svg{transform:translate(2px,-2px)}
+.sk a.sk-btn-ghost{background:transparent;color:var(--head);border:1px solid var(--rule)}
+.sk a.sk-btn-ghost:hover{background:var(--card);border-color:var(--faint);color:var(--head);transform:translateY(-1px)}
+:root[data-theme="dark"] .sk a.sk-btn-ghost{color:var(--ink)}
+:root[data-theme="dark"] .sk a.sk-btn-ghost:hover{color:var(--ink)}
+
+/* ── the media panel — one card, three views ── */
+.sk-media{position:relative;overflow:hidden;border-radius:10px;background:#10142E;
+  aspect-ratio:4/3;border:1px solid var(--rule);
+  opacity:0;transform:scale(1.03);
+  transition:opacity .7s ease .22s,transform .9s cubic-bezier(.22,1,.36,1) .22s,
+    background-color .35s ease,border-color .35s ease}
+.dbody.open .sk-media{opacity:1;transform:none}
+.sk-pane{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+.sk-pane.on{opacity:1}
+.sk-pane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* text/poster artifacts letterbox rather than crop; --pane-bg picks the mat */
+.sk-pane-contain{background:var(--pane-bg,#000)}
+.sk-pane-contain img{object-fit:contain}
+/* bare panes — transparent art floats on the page; the card sheds its chrome
+   (JS mirrors the active pane's bareness onto .sk-media) */
+.sk-pane-bare img{object-fit:contain;inset:2.5%;width:95%;height:95%}
+.sk-media.bare{background:transparent;border-color:transparent}
+/* the cycle dots — one per photo in the active phase */
+.sk-dots{position:absolute;z-index:2;left:50%;transform:translateX(-50%);bottom:.65rem;
+  display:flex;gap:6px;padding:6px 9px;border-radius:999px;
+  background:rgba(18,13,20,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  opacity:0;transition:opacity .5s ease .55s}
+.dbody.open .sk-dots{opacity:1}
+.sk-dots[hidden]{display:none}
+.sk-dot{width:6px;height:6px;padding:0;border-radius:50%;cursor:pointer;
+  background:rgba(237,231,217,.38);transition:background-color .25s ease,transform .25s ease}
+.sk-dot:hover{background:rgba(237,231,217,.7)}
+.sk-dot[aria-current="true"]{background:#EDE7D9;transform:scale(1.25)}
+
+/* closing — the cascade runs backwards */
+.dbody.gathering .sk-line>span{transform:translateY(114%);
+  transition:transform .4s cubic-bezier(.55,.06,.68,.19) .08s}
+.dbody.gathering .sk-ctas,.dbody.gathering .sk-steps{opacity:0;transform:translateY(7px);
+  transition:opacity .26s ease,transform .26s ease}
+.dbody.gathering .sk-dots{opacity:0;transition:opacity .2s ease}
+.dbody.gathering .sk-media{opacity:0;transform:scale(1.02);
+  transition:opacity .32s ease .12s,transform .46s cubic-bezier(.55,.06,.68,.19) .12s}
+@media (prefers-reduced-motion:reduce){
+  .sk-ctas,.sk-steps,.sk-media,.sk-dots{opacity:1;transform:none;transition:none}
+  .sk-line>span{transform:none;transition:none}
+}
 
 /* ═══════════ INTERLUDE — the record ═══════════ */
 .inter{margin-top:1.7rem;text-align:center}
@@ -385,6 +496,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   transition:transform .5s cubic-bezier(.55,.06,.68,.19) calc(.55s - var(--dd,.3s)),
     opacity .35s ease calc(.58s - var(--dd,.3s))}
 .hu-tile img,.hu-tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the at-Oregon strip — same marquee, one quiet row, tighter and shorter */
+.og{margin-top:.9rem;clear:both}
+.og .hu-tile{height:clamp(5.75rem,13vw,8rem)}
 @media (max-width:600px){
   .hu-intro{flex-direction:column;align-items:center}
   .hu-copy{width:100%}
@@ -505,6 +619,17 @@ footer{
         <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026</figcaption></figure>
         <p>I received my B.S. in Data Science from the University of Oregon in 2026, where I served as Director of Venture Capital for the Oregon Blockchain Group and External VP of Chi Psi Fraternity.</p>
         <p>I'm interested in how emerging technologies reshape institutions, markets, and ultimately how they affect the human experience. That question feels like the defining challenge of this century.</p>
+        <div class="hu og" id="ogMq" role="group" aria-label="Scenes from Oregon and the road">
+          <div class="hu-mq" data-v="34">
+            <div class="hu-track">
+              <figure class="hu-tile" style="aspect-ratio:810/480"><picture><source type="image/webp" srcset="assets/about/og-obg.webp"><img src="assets/about/og-obg.jpg" width="810" height="480" loading="lazy" alt="The Oregon Blockchain Group in suits outside the Lillis Business Complex"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-walk.webp"><img src="assets/about/og-walk.jpg" width="724" height="480" loading="lazy" alt="Walking to Autzen Stadium in a sea of green graduation caps"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:719/480"><picture><source type="image/webp" srcset="assets/about/og-ny.webp"><img src="assets/about/og-ny.jpg" width="719" height="480" loading="lazy" alt="On a New York rooftop in a grey suit, the midtown skyline behind"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-autzen.webp"><img src="assets/about/og-autzen.jpg" width="724" height="480" loading="lazy" alt="Empty bleachers under the Welcome to Autzen Stadium press box"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-siargao.webp"><img src="assets/about/og-siargao.jpg" width="724" height="480" loading="lazy" alt="Sitting on a ledge above a palm forest in Siargao, Philippines"/></picture></figure>
+            </div>
+          </div>
+        </div>
       </div></div></div>
     </div>
 
@@ -514,10 +639,100 @@ footer{
         <span class="dlabel" data-glitch>building</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
       </button>
-      <div class="dbody"><div class="dinner" id="d-built" inert><div class="dpad">
-        <ul class="roster">
-          <li><span class="nm">Shakedown</span> <span class="sep">·</span> on-chain ticketing for independent music venues. Four years of fronting a band taught me that a single gig is dozens of handshake agreements; Shakedown writes them into the ticket — resale conditions the venue sets, QR check-in at the door, payment splits enforced in hardware, hybrid NFTs that keep working after the show. It won Best Use Case of Solana at QuackHacks III and reached the finals of Ledger's N3XT Build &amp; Show; Ledger later invited me on a podcast to walk through the build. The current build: Next.js and TypeScript, Supabase, Anchor contracts in Rust, Metaplex Core, Privy embedded wallets.</li>
-        </ul>
+      <div class="dbody dbody-wide"><div class="dinner" id="d-built" inert><div class="dpad">
+        <div class="sk">
+
+          <div class="sk-lede">
+            <span class="sk-line"><span class="sk-lock" style="--d:.24s">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-mark.webp">
+                <img class="sk-mark" src="assets/shakedown/sk-mark.png" width="240" height="260" loading="lazy" alt=""/>
+              </picture>
+              <span class="sk-word">Shakedown</span>
+            </span></span>
+            <div class="sk-copy">
+              <p>Years of playing in a band taught me that a single gig can be held together by just a handful of handshake agreements. Shakedown writes them into the ticket.</p>
+            </div>
+            <div class="sk-steps">
+              <div class="sk-step on" data-phase="idea">
+                <button class="sk-step-t" aria-expanded="true" aria-controls="sks-idea">
+                  <span class="sk-step-n">01</span>the idea
+                  <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                </button>
+                <div class="sk-step-b" id="sks-idea"><div class="sk-step-in">
+                  <p>Peer-to-peer markets for a peer-to-peer economy. Tickets that carry the venue's resale conditions, QR check-in at the door, and payment splits that settle when the show ends — built on Next.js and Anchor.</p>
+                </div></div>
+              </div>
+              <div class="sk-step" data-phase="solana">
+                <button class="sk-step-t" aria-expanded="false" aria-controls="sks-solana">
+                  <span class="sk-step-n">02</span>best use case of Solana
+                  <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                </button>
+                <div class="sk-step-b" id="sks-solana"><div class="sk-step-in">
+                  <p>The first build took Best Use Case of Solana at QuackHacks III — a weekend proof that a ticket can live on-chain and still feel like a ticket at the door.</p>
+                </div></div>
+              </div>
+              <div class="sk-step" data-phase="n3xt">
+                <button class="sk-step-t" aria-expanded="false" aria-controls="sks-n3xt">
+                  <span class="sk-step-n">03</span>N3XT Program
+                  <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                </button>
+                <div class="sk-step-b" id="sks-n3xt"><div class="sk-step-in">
+                  <p>Ledger picked Shakedown for its N3XT Build &amp; Show — a payout agent that splits live-show revenue across artists, openers, and venue, with every payout approved on-device. A finalist run and a podcast invite came with it.</p>
+                </div></div>
+              </div>
+            </div>
+            <div class="sk-ctas">
+              <a class="sk-btn" href="https://onshakedown.xyz" target="_blank" rel="noopener">onshakedown.xyz
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg>
+              </a>
+              <a class="sk-btn sk-btn-ghost" href="https://github.com/jeremymitaux" target="_blank" rel="noopener">GitHub
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="sk-media">
+            <div class="sk-pane on sk-pane-bare" data-phase="idea">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-tab-logo-cream.webp">
+                <img src="assets/shakedown/sk-tab-logo-cream.png" width="773" height="1000" loading="lazy" alt="Shakedown: the dither-sun logomark over an indigo field, the wordmark across its base"/>
+              </picture>
+            </div>
+            <div class="sk-pane sk-pane-bare" data-phase="idea">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-tab-board-t.webp">
+                <img src="assets/shakedown/sk-tab-board-t.png" width="1200" height="1200" loading="lazy" alt="The Shakedown brand board: lockup, posters, palette, and social mockups"/>
+              </picture>
+            </div>
+            <div class="sk-pane" data-phase="solana">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-hack-stage.webp">
+                <img src="assets/shakedown/sk-hack-stage.jpg" width="1200" height="900" loading="lazy" alt="On stage at QuackHacks III under a slide reading MLH — Best Use of Solana, Shakedown, Jeremy Mitaux"/>
+              </picture>
+            </div>
+            <div class="sk-pane" data-phase="solana">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-win.webp">
+                <img src="assets/shakedown/sk-win.jpg" width="1600" height="1066" loading="lazy" alt="Standing at the front of a packed hackathon hall, teams at long tables with laptops behind me"/>
+              </picture>
+            </div>
+            <div class="sk-pane sk-pane-contain" data-phase="n3xt">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-ledger.webp">
+                <img src="assets/shakedown/sk-ledger.jpg" width="1100" height="1100" loading="lazy" alt="Ledger N3XT card: the Shakedown payout agent splitting live-show revenue on Solana, every payout approved on a Ledger device"/>
+              </picture>
+            </div>
+            <div class="sk-pane sk-pane-contain" data-phase="n3xt">
+              <picture>
+                <source type="image/webp" srcset="assets/shakedown/sk-ledger-post.webp">
+                <img src="assets/shakedown/sk-ledger-post.jpg" width="956" height="900" loading="lazy" alt="Ledger's post on X: Win a hackathon. Build an NFT ticketing platform that pays artists out through it — that's Jeremy Mitaux's path, one of the students in our Ledger N3XT program."/>
+              </picture>
+            </div>
+            <div class="sk-dots" role="group" aria-label="Photos in this phase"></div>
+          </div>
+
+        </div>
       </div></div></div>
     </div>
 
@@ -630,13 +845,14 @@ footer{
       </div>
       <div class="hpanel" id="hp-b" role="tabpanel" aria-labelledby="ht-b">
         <ul class="hlist">
+          <li><span class="ti">The Republic</span>, Plato</li>
+          <li><span class="ti">Grapes of Wrath</span>, John Steinbeck</li>
           <li><span class="ti">Rich Dad Poor Dad</span>, Robert Kiyosaki</li>
           <li><span class="ti">Meditations</span>, Marcus Aurelius</li>
           <li><span class="ti">Tortilla Flat</span>, John Steinbeck</li>
           <li><span class="ti">Steve Jobs</span>, Walter Isaacson</li>
           <li><span class="ti">The Prince</span>, Niccolò Machiavelli</li>
           <li><span class="ti">The Lucifer Effect</span>, Philip Zimbardo</li>
-          <li><span class="ti">The Republic</span>, Plato</li>
         </ul>
       </div>
     </div></div>
@@ -726,7 +942,9 @@ syncMode();
 [].slice.call(document.querySelectorAll('.dtrig')).forEach(function(btn){
   var inner=document.getElementById(btn.getAttribute('aria-controls'));
   var body=inner.parentElement;
-  var hasStrip=!!inner.querySelector('.pgrid');
+  /* folds that stage their contents on open need the reverse cue on close —
+     hold .open one beat longer while .gathering plays, then collapse */
+  var hasStrip=!!inner.querySelector('.pgrid,.sk');
   var gatherT=null;
   btn.addEventListener('click',function(){
     var open=btn.getAttribute('aria-expanded')==='true';
@@ -766,23 +984,29 @@ function tick(){
 }
 tick(); setInterval(tick,1000);
 
-/* ── lightbox ── */
+/* ── lightbox ──
+   two sets share it: the 50mm strip and the two Shakedown frames.
+   openLb() takes the set, so prev/next stay inside the set you opened. */
 var figs=[].slice.call(document.querySelectorAll('#pgrid figure'));
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
     lbCap=document.getElementById('lbCap'), lbNum=document.getElementById('lbNum');
 var cur=0, lastFocus=null;
-var shots=figs.map(function(f){
-  var img=f.querySelector('img');
-  return {src:img.currentSrc||img.src, jpg:img.src, alt:img.alt,
-          cap:f.querySelector('figcaption span').textContent};
-});
-function show(i){
-  cur=(i+shots.length)%shots.length;
-  var s=shots[cur];
-  lbImg.src=s.jpg; lbImg.alt=s.alt; lbCap.textContent=s.cap;
-  lbNum.textContent=(cur+1)+' / '+shots.length;
+function toShots(list){
+  return list.map(function(f){
+    var img=f.querySelector('img');
+    return {jpg:img.src, alt:img.alt, cap:f.querySelector('figcaption span').textContent};
+  });
 }
-function openLb(i){
+var shots=toShots(figs);
+var set=shots;
+function show(i){
+  cur=(i+set.length)%set.length;
+  var s=set[cur];
+  lbImg.src=s.jpg; lbImg.alt=s.alt; lbCap.textContent=s.cap;
+  lbNum.textContent=(cur+1)+' / '+set.length;
+}
+function openLb(i,from){
+  set=from||shots;
   lastFocus=document.activeElement;
   lb.hidden=false; lb.classList.add('on'); show(i);
   document.body.style.overflow='hidden';
@@ -803,6 +1027,59 @@ figs.forEach(function(f,i){
   f.addEventListener('click',function(){ if(f.classList.contains('on')) openLb(i); else setShot(f); });
   f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(i);} });
 });
+/* the Shakedown phases — a step drives the panel; the panel drifts
+   through its phase's photos on its own (paused on hover / closed fold) */
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.sk-step'));
+  if(!steps.length) return;
+  var panes=[].slice.call(document.querySelectorAll('.sk-pane'));
+  var dotsHost=document.querySelector('.sk-dots');
+  var media=document.querySelector('.sk-media');
+  var fold=media.closest('.dbody');
+  var phase=steps[0].getAttribute('data-phase'), idx=0, timer=null, hover=false;
+  function list(){ return panes.filter(function(p){return p.getAttribute('data-phase')===phase;}); }
+  function render(){
+    var l=list();
+    panes.forEach(function(p){ p.classList.remove('on'); });
+    l[idx].classList.add('on');
+    media.classList.toggle('bare', l[idx].classList.contains('sk-pane-bare'));
+    [].forEach.call(dotsHost.children,function(d,j){ d.setAttribute('aria-current',j===idx?'true':'false'); });
+  }
+  function buildDots(){
+    var l=list();
+    dotsHost.innerHTML='';
+    dotsHost.hidden=l.length<2;
+    l.forEach(function(_,j){
+      var b=document.createElement('button');
+      b.className='sk-dot'; b.type='button';
+      b.setAttribute('aria-label','Photo '+(j+1)+' of '+l.length);
+      b.addEventListener('click',function(){ idx=j; render(); restart(); });
+      dotsHost.appendChild(b);
+    });
+  }
+  function tick(){
+    if(hover||!fold.classList.contains('open')) return;
+    var n=list().length;
+    if(n<2) return;
+    idx=(idx+1)%n; render();
+  }
+  function restart(){ if(timer) clearInterval(timer); if(!reduce) timer=setInterval(tick,3800); }
+  steps.forEach(function(s){
+    s.querySelector('.sk-step-t').addEventListener('click',function(){
+      if(s.classList.contains('on')) return;
+      steps.forEach(function(o){
+        var on=o===s;
+        o.classList.toggle('on',on);
+        o.querySelector('.sk-step-t').setAttribute('aria-expanded',on?'true':'false');
+      });
+      phase=s.getAttribute('data-phase'); idx=0;
+      buildDots(); render(); restart();
+    });
+  });
+  media.addEventListener('pointerenter',function(){ hover=true; });
+  media.addEventListener('pointerleave',function(){ hover=false; });
+  buildDots(); render(); restart();
+})();
 document.getElementById('lbX').addEventListener('click',closeLb);
 document.getElementById('lbP').addEventListener('click',function(){show(cur-1);});
 document.getElementById('lbN').addEventListener('click',function(){show(cur+1);});
@@ -814,13 +1091,12 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='ArrowRight') show(cur+1);
 });
 
-/* ── on the ground — scroll-velocity marquee (50mm fold) ──
+/* ── scroll-velocity marquees (Henry's Uncle + at Oregon) ──
    port of the framer-motion strip: baseX drifts each frame; scrollY
    velocity is spring-smoothed into a factor that scales the drift
    and flips its direction when you scroll up. content is cloned in
    whole-sequence pairs so the wrap at half the track lands on a seam. */
-(function(){
-  var host=document.getElementById('huMq');
+function initMarquee(host){
   if(!host) return;
   var GAP=8;
   var rows=[].slice.call(host.querySelectorAll('.hu-mq'));
@@ -918,7 +1194,9 @@ document.addEventListener('keydown',function(e){
     });
   }
   requestAnimationFrame(frame);
-})();
+}
+initMarquee(document.getElementById('huMq'));
+initMarquee(document.getElementById('ogMq'));
 
 /* ── interlude tabs — the record ── */
 (function(){
