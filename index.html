@@ -439,12 +439,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .pgrid figure:nth-child(6){--k:-1.5;--dd:.41s}
 .pgrid figure:nth-child(7){--k:-2.5;--dd:.48s}
 .pgrid figure:nth-child(8){--k:-3.5;--dd:.55s}
-/* the at-Oregon strip — five frames, same mechanics, its own centre */
-#pgridOg figure:nth-child(1){--k:2;--dd:.45s}
-#pgridOg figure:nth-child(2){--k:1;--dd:.38s}
-#pgridOg figure:nth-child(3){--k:0;--dd:.31s}
-#pgridOg figure:nth-child(4){--k:-1;--dd:.38s}
-#pgridOg figure:nth-child(5){--k:-2;--dd:.45s}
 .pgrid picture{position:absolute;inset:0}
 .pgrid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pgrid figcaption{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;
@@ -506,6 +500,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   transition:transform .5s cubic-bezier(.55,.06,.68,.19) calc(.55s - var(--dd,.3s)),
     opacity .35s ease calc(.58s - var(--dd,.3s))}
 .hu-tile img,.hu-tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* the at-Oregon strip — same marquee, one quiet row, tighter and shorter */
+.og{margin-top:.9rem;clear:both}
+.og .hu-tile{height:clamp(5.75rem,13vw,8rem)}
 @media (max-width:600px){
   .hu-intro{flex-direction:column;align-items:center}
   .hu-copy{width:100%}
@@ -628,12 +625,16 @@ footer{
         <p>I received my B.S. in Data Science from the University of Oregon in 2026, where I served as Director of Venture Capital for the Oregon Blockchain Group and External VP of Chi Psi Fraternity.</p>
         <p>I'm interested in how emerging technologies reshape institutions, markets, and ultimately how they affect the human experience. That question feels like the defining challenge of this century.</p>
         </div>
-        <div class="pgrid" id="pgridOg">
-          <figure data-i="0" style="--ar:1.69"><picture><source type="image/webp" srcset="assets/about/og-obg.webp"><img src="assets/about/og-obg.jpg" width="810" height="480" loading="lazy" alt="The Oregon Blockchain Group in suits outside the Lillis Business Complex"/></picture><figcaption><span>Oregon Blockchain Group · Lillis Complex</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="1" style="--ar:1.51"><picture><source type="image/webp" srcset="assets/about/og-walk.webp"><img src="assets/about/og-walk.jpg" width="724" height="480" loading="lazy" alt="Walking to Autzen Stadium in a sea of green graduation caps"/></picture><figcaption><span>Grad walk to Autzen · Eugene</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="2" class="on" style="--ar:1.50"><picture><source type="image/webp" srcset="assets/about/og-ny.webp"><img src="assets/about/og-ny.jpg" width="719" height="480" loading="lazy" alt="On a New York rooftop in a grey suit, the midtown skyline behind"/></picture><figcaption><span>Rooftop · New York</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="3" style="--ar:1.51"><picture><source type="image/webp" srcset="assets/about/og-autzen.webp"><img src="assets/about/og-autzen.jpg" width="724" height="480" loading="lazy" alt="Empty bleachers under the Welcome to Autzen Stadium press box"/></picture><figcaption><span>Autzen Stadium · Eugene</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="4" style="--ar:1.51"><picture><source type="image/webp" srcset="assets/about/og-siargao.webp"><img src="assets/about/og-siargao.jpg" width="724" height="480" loading="lazy" alt="Sitting on a ledge above a palm forest in Siargao, Philippines"/></picture><figcaption><span>Above the palms · Siargao</span><span class="film">DIGITAL</span></figcaption></figure>
+        <div class="hu og" id="ogMq" role="group" aria-label="Scenes from Oregon and the road">
+          <div class="hu-mq" data-v="34">
+            <div class="hu-track">
+              <figure class="hu-tile" style="aspect-ratio:810/480"><picture><source type="image/webp" srcset="assets/about/og-obg.webp"><img src="assets/about/og-obg.jpg" width="810" height="480" loading="lazy" alt="The Oregon Blockchain Group in suits outside the Lillis Business Complex"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-walk.webp"><img src="assets/about/og-walk.jpg" width="724" height="480" loading="lazy" alt="Walking to Autzen Stadium in a sea of green graduation caps"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:719/480"><picture><source type="image/webp" srcset="assets/about/og-ny.webp"><img src="assets/about/og-ny.jpg" width="719" height="480" loading="lazy" alt="On a New York rooftop in a grey suit, the midtown skyline behind"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-autzen.webp"><img src="assets/about/og-autzen.jpg" width="724" height="480" loading="lazy" alt="Empty bleachers under the Welcome to Autzen Stadium press box"/></picture></figure>
+              <figure class="hu-tile" style="aspect-ratio:724/480"><picture><source type="image/webp" srcset="assets/about/og-siargao.webp"><img src="assets/about/og-siargao.jpg" width="724" height="480" loading="lazy" alt="Sitting on a ledge above a palm forest in Siargao, Philippines"/></picture></figure>
+            </div>
+          </div>
         </div>
       </div></div></div>
     </div>
@@ -949,7 +950,7 @@ syncMode();
   var body=inner.parentElement;
   /* folds that stage their contents on open need the reverse cue on close —
      hold .open one beat longer while .gathering plays, then collapse */
-  var hasStrip=!!inner.querySelector('.pgrid,.sk');
+  var hasStrip=!!inner.querySelector('.pgrid,.sk,.hu-mq');
   var gatherT=null;
   btn.addEventListener('click',function(){
     var open=btn.getAttribute('aria-expanded')==='true';
@@ -990,17 +991,20 @@ function tick(){
 tick(); setInterval(tick,1000);
 
 /* ── lightbox ──
-   each .pgrid strip is its own set (life in 50mm, at Oregon, ...) so
-   prev/next stay inside the set you opened. */
+   two sets share it: the 50mm strip and the two Shakedown frames.
+   openLb() takes the set, so prev/next stay inside the set you opened. */
+var figs=[].slice.call(document.querySelectorAll('#pgrid figure'));
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
     lbCap=document.getElementById('lbCap'), lbNum=document.getElementById('lbNum');
-var cur=0, lastFocus=null, set=[];
+var cur=0, lastFocus=null;
 function toShots(list){
   return list.map(function(f){
     var img=f.querySelector('img');
     return {jpg:img.src, alt:img.alt, cap:f.querySelector('figcaption span').textContent};
   });
 }
+var shots=toShots(figs);
+var set=shots;
 function show(i){
   cur=(i+set.length)%set.length;
   var s=set[cur];
@@ -1008,7 +1012,7 @@ function show(i){
   lbNum.textContent=(cur+1)+' / '+set.length;
 }
 function openLb(i,from){
-  set=from;
+  set=from||shots;
   lastFocus=document.activeElement;
   lb.hidden=false; lb.classList.add('on'); show(i);
   document.body.style.overflow='hidden';
@@ -1020,18 +1024,14 @@ function closeLb(){
   if(lastFocus&&lastFocus.focus) lastFocus.focus();
 }
 /* expanding strip — hover/focus/tap opens a frame; activating the open frame goes full-size */
-[].slice.call(document.querySelectorAll('.pgrid')).forEach(function(grid){
-  var figs=[].slice.call(grid.querySelectorAll('figure'));
-  var shots=toShots(figs);
-  function setShot(f){ figs.forEach(function(o){ o.classList.toggle('on',o===f); }); }
-  figs.forEach(function(f,i){
-    f.setAttribute('tabindex','0'); f.setAttribute('role','button');
-    f.setAttribute('aria-label','View photo: '+shots[i].cap);
-    f.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') setShot(f); });
-    f.addEventListener('focus',function(){ setShot(f); });
-    f.addEventListener('click',function(){ if(f.classList.contains('on')) openLb(i,shots); else setShot(f); });
-    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(i,shots);} });
-  });
+function setShot(f){ figs.forEach(function(o){ o.classList.toggle('on',o===f); }); }
+figs.forEach(function(f,i){
+  f.setAttribute('tabindex','0'); f.setAttribute('role','button');
+  f.setAttribute('aria-label','View photo: '+shots[i].cap);
+  f.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') setShot(f); });
+  f.addEventListener('focus',function(){ setShot(f); });
+  f.addEventListener('click',function(){ if(f.classList.contains('on')) openLb(i); else setShot(f); });
+  f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(i);} });
 });
 /* the Shakedown phases — a step drives the panel; the panel drifts
    through its phase's photos on its own (paused on hover / closed fold) */
@@ -1097,7 +1097,7 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='ArrowRight') show(cur+1);
 });
 
-/* ── scroll-velocity marquees (Henry's Uncle) ──
+/* ── scroll-velocity marquees (Henry's Uncle + at Oregon) ──
    port of the framer-motion strip: baseX drifts each frame; scrollY
    velocity is spring-smoothed into a factor that scales the drift
    and flips its direction when you scroll up. content is cloned in
@@ -1202,6 +1202,7 @@ function initMarquee(host){
   requestAnimationFrame(frame);
 }
 initMarquee(document.getElementById('huMq'));
+initMarquee(document.getElementById('ogMq'));
 
 /* ── interlude tabs — the record ── */
 (function(){
