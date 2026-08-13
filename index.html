@@ -2,30 +2,34 @@
 <!--
   ═══════════════════════════════════════════════════════════
    JEREMY MITAUX — quiet edition, 2026
-   prussian ink on warm paper · one ocean, held at low tide.
+   lamplight paper on prussian night · one ocean, held at low tide.
    hand-built, no frameworks. view source, say hi.
    predecessors live in index-v1..v4.html
   ═══════════════════════════════════════════════════════════
 -->
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Jeremy Mitaux</title>
 <meta name="description" content="Jeremy Mitaux — building Shakedown, on-chain ticketing born from four years of fronting a band. Fund reports for the Oregon Blockchain Group's 25 ETH portfolio. Henry's Uncle for the music, a Canon AE-1 for the rest. Writing from Manila." />
-<meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#F5EEDA" id="metaTheme" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#0D1727" id="metaTheme" />
 <meta name="author" content="Jeremy Mitaux" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Jeremy Mitaux" />
 <meta property="og:description" content="Building Shakedown from Manila — on-chain ticketing born from four years of fronting a band. Fund reports, film photos, and the greatest band you've never heard of." />
-<meta property="og:image" content="assets/media/portrait.jpg" />
+<meta property="og:image" content="https://jeremymitaux.com/assets/media/og-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Jeremy Mitaux at a window over the city, film camera on a blue table." />
+<meta property="og:url" content="https://jeremymitaux.com/" />
 <meta property="og:site_name" content="jeremymitaux" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Jeremy Mitaux" />
 <meta name="twitter:description" content="Building Shakedown from Manila. One signal, one ocean." />
-<meta name="twitter:image" content="assets/media/portrait.jpg" />
+<meta name="twitter:image" content="https://jeremymitaux.com/assets/media/og-card.jpg" />
 
 <link rel="icon" href="fleur-de-lis-1-svgrepo-com.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="fleur-de-lis-1-svgrepo-com.svg" />
@@ -35,10 +39,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Urbanist:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <script>
-/* theme boot — before paint */
+/* theme boot — before paint.
+   blue is the house mood: everyone lands in it unless they've chosen paper. */
 (function(){try{var t=localStorage.getItem('theme');
-if(t!=='dark'&&t!=='light'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
-document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();
+if(t!=='dark'&&t!=='light'){t='dark';}
+document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();
 </script>
 
 <script type="application/ld+json">
@@ -53,8 +58,8 @@ document.documentElement.dataset.theme=t;}catch(e){document.documentElement.data
 
 <style>
 /* ═══════════ TOKENS ═══════════
-   light = SURFACE (sun-washed limestone, prussian ink, terracotta)
-   dark  = DEPTH   (lavender night over the Rhône, lamplight paper)
+   dark  = DEPTH   (lavender night over the Rhône, lamplight paper) — the default mood
+   light = SURFACE (sun-washed limestone, prussian ink, terracotta) — the opt-out
 
    type: Louize Display (heads) / Haffer (body) lead the stacks —
    they apply automatically once installed or @font-face'd here.
@@ -145,10 +150,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   background:var(--head);display:flex;align-items:center;justify-content:center;
   transition:transform .32s cubic-bezier(.22,1,.36,1)}
 .mode-knob .mode-ic{width:10px;height:10px;color:var(--paper)}
-.mode-knob .ic-moon{display:none}
+.mode-knob .ic-ink{display:none}
 :root[data-theme="dark"] .mode-knob{transform:translateX(22px)}
-:root[data-theme="dark"] .mode-knob .ic-sun{display:none}
-:root[data-theme="dark"] .mode-knob .ic-moon{display:block}
+:root[data-theme="dark"] .mode-knob .ic-paper{display:none}
+:root[data-theme="dark"] .mode-knob .ic-ink{display:block}
 
 /* greek glitch */
 [data-glitch]{transition:color .2s ease}
@@ -596,13 +601,14 @@ footer{
         <p class="updated">Updated August 4, 2026</p>
       </div>
       <div class="mode">
-        <span class="mode-cap">BLUE MODE</span>
-        <button class="mode-track" id="modeBtn" role="switch" aria-checked="false" aria-label="Toggle depth mode (dark theme)">
-          <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M2.4 12h2.4M19.2 12h2.4M5 5l1.7 1.7M17.3 17.3l1.7 1.7M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
-          <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.4A8 8 0 0 1 9.6 4 6.6 6.6 0 1 0 20 14.4Z"/></svg>
+        <span class="mode-cap" id="modeCap">PAPER MODE</span>
+        <button class="mode-track" id="modeBtn" role="switch" aria-checked="true" aria-label="Switch to paper mode (light theme)">
+          <!-- paper (a sheet) and ink (a drop) — the two ways this page can be printed -->
+          <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.6 3.2h8.2l4.6 4.6v12.8a.4.4 0 0 1-.4.4H5.6a.4.4 0 0 1-.4-.4V3.6a.4.4 0 0 1 .4-.4Z"/><path d="M13.6 3.4v4.6h4.6"/></svg>
+          <svg class="mode-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2c3.6 4 5.9 7 5.9 9.8a5.9 5.9 0 0 1-11.8 0c0-2.8 2.3-5.8 5.9-9.8Z"/></svg>
           <span class="mode-knob">
-            <svg class="mode-ic ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.4M12 19.2v2.4M2.4 12h2.4M19.2 12h2.4M5 5l1.7 1.7M17.3 17.3l1.7 1.7M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>
-            <svg class="mode-ic ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.4A8 8 0 0 1 9.6 4 6.6 6.6 0 1 0 20 14.4Z"/></svg>
+            <svg class="mode-ic ic-paper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.6 3.2h8.2l4.6 4.6v12.8a.4.4 0 0 1-.4.4H5.6a.4.4 0 0 1-.4-.4V3.6a.4.4 0 0 1 .4-.4Z"/><path d="M13.6 3.4v4.6h4.6"/></svg>
+            <svg class="mode-ic ic-ink" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 3.2c3.6 4 5.9 7 5.9 9.8a5.9 5.9 0 0 1-11.8 0c0-2.8 2.3-5.8 5.9-9.8Z"/></svg>
           </span>
         </button>
       </div>
@@ -837,7 +843,8 @@ footer{
           <section class="hgrp" aria-labelledby="hg-pods">
             <p class="hgroup" id="hg-pods">podcasts</p>
             <ul>
-              <li>The <span class="ti">Blockworks</span> feed, most mornings</li>
+              <li><span class="ti">Dwarkesh Patel's</span> channel, especially with Sarah Paine or or Ada Palmer</li>
+              <li><span class="ti">Markets Weekly</span>, Joseph Wang</li>
             </ul>
           </section>
           <section class="hgrp" aria-labelledby="hg-films">
@@ -845,6 +852,7 @@ footer{
             <ul>
               <li><span class="ti">About Time</span>, Richard Curtis</li>
               <li><span class="ti">The Before Trilogy</span>, Richard Linklater</li>
+              <li><span class="ti">Almost Famous</span>, Cameron Crowe</li>
             </ul>
           </section>
         </div>
@@ -874,7 +882,7 @@ footer{
       <li class="wrow"><a class="t" href="reports_docs/Railgun%20Fund%20Report.pdf" target="_blank" rel="noopener">Railgun — $RAIL</a><span class="k">fund report · may 2026</span></li>
       <li class="wrow"><a class="t" href="reports_docs/Pendle%20Fund%20Report%20New.pdf" target="_blank" rel="noopener">Pendle — $PENDLE</a><span class="k">fund report · feb 2026</span></li>
       <li class="wrow"><a class="t" href="reports_docs/Chainlink%2C%20%24LINK%20Fund%20Report%20%2811.18.2025%29.pdf" target="_blank" rel="noopener">Chainlink — $LINK</a><span class="k">fund report · nov 2025</span></li>
-      <li class="wrow"><a class="t" href="reports_docs/Aster%2C%20%24AST%20Fundamental%20Report%20%2810.14.2025%29.pdf" target="_blank" rel="noopener">Aster — $AST</a><span class="k">fundamental · oct 2025</span></li>
+      <li class="wrow"><a class="t" href="reports_docs/Aster%2C%20%24AST%20Fundamental%20Report%20%2810.14.2025%29.pdf" target="_blank" rel="noopener">Aster — $ASTER</a><span class="k">fundamental · oct 2025</span></li>
       <li class="wrow"><a class="t" href="reports_docs/Solana%20Fund%20Report%20DormDAO.pdf" target="_blank" rel="noopener">Solana — $SOL</a><span class="k">fund report · apr 2025</span></li>
       <li class="wrow"><a class="t" href="https://medium.com/oregon-blockchain-group/the-potential-for-a-web3-music-economy-00ed3a3c687f" target="_blank" rel="noopener">A Web3 Music Economy</a><span class="k">essay · medium · 2025</span></li>
     </ul>
@@ -930,10 +938,14 @@ requestAnimationFrame(function(){requestAnimationFrame(function(){
 
 /* ── depth mode ── */
 var modeBtn=document.getElementById('modeBtn');
+var modeCap=document.getElementById('modeCap');
 var metaTheme=document.getElementById('metaTheme');
 function syncMode(){
   var dark=root.dataset.theme==='dark';
   modeBtn.setAttribute('aria-checked',String(dark));
+  /* the cap names where the switch takes you, not where you are */
+  if(modeCap) modeCap.textContent=dark?'PAPER MODE':'BLUE MODE';
+  modeBtn.setAttribute('aria-label',dark?'Switch to paper mode (light theme)':'Switch to blue mode (dark theme)');
   if(metaTheme) metaTheme.setAttribute('content',dark?'#0D1727':'#F5EEDA');
 }
 modeBtn.addEventListener('click',function(){
