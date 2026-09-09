@@ -353,6 +353,21 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 :root[data-theme="dark"] .hlist .ti{color:var(--ink)}
 .hgroup{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
   color:var(--faint);margin:0}
+/* currently reading — pulled out above the shelf */
+.hnow{text-align:left;padding:.9rem 2px .6rem;border-bottom:1px solid var(--rule-soft)}
+.hnow .hgroup{display:flex;align-items:center;gap:6px;color:var(--coral-deep)}
+.hnow-dot{width:5px;height:5px;border-radius:50%;background:var(--coral);
+  box-shadow:0 0 0 0 color-mix(in oklab,var(--coral) 45%,transparent);animation:now-pulse 2.6s ease-out infinite}
+.hnow-book{margin:.35rem 0 0;font-size:.9375rem;line-height:1.5;color:var(--muted)}
+.hnow-book .ti{font-family:var(--font-display);font-style:italic;color:var(--head)}
+:root[data-theme="dark"] .hnow-book .ti{color:var(--ink)}
+.hnow+.hlist{padding-top:.8rem}
+@keyframes now-pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in oklab,var(--coral) 45%,transparent)}
+  70%{box-shadow:0 0 0 6px color-mix(in oklab,var(--coral) 0%,transparent)}
+  100%{box-shadow:0 0 0 0 color-mix(in oklab,var(--coral) 0%,transparent)}
+}
+@media (prefers-reduced-motion:reduce){ .hnow-dot{animation:none} }
 
 /* ═══════════ WRITING ═══════════ */
 .wsec{margin-top:1.7rem}
@@ -598,7 +613,7 @@ footer{
     <div class="head-row">
       <div>
         <h1 class="name"><em>Jeremy Mitaux</em></h1>
-        <p class="updated">Updated August 4, 2026</p>
+        <p class="updated">Updated September 8, 2026</p>
       </div>
       <div class="mode">
         <span class="mode-cap" id="modeCap">PAPER MODE</span>
@@ -761,14 +776,14 @@ footer{
       <div class="dbody dbody-wide"><div class="dinner" id="d-photo" inert><div class="dpad">
         <p style="margin-bottom:.8rem">The stock lens on the AE-1 is a prime 50mm f1.8. My favorite thing about this lens is the limitations it places on you. Want to zoom out? Use your feet. Moreover, it is said that the human eye sees somewhere between 40mm and 50mm. I like to think of this as the most human form of photography.</p>
         <div class="pgrid" id="pgrid">
-          <figure data-i="0" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/san-juan.webp"><img src="assets/photos/san-juan.jpg" width="1024" height="1544" loading="lazy" alt="A white cottage with a shingle roof behind a picket fence and overgrown garden in San Juan Capistrano"/></picture><figcaption><span>Los Rios District · San Juan Capistrano</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="1" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/tall-firs.webp"><img src="assets/photos/tall-firs.jpg" width="1067" height="1600" loading="lazy" alt="Morning light breaking through tall mossy firs in an Oregon forest"/></picture><figcaption><span>Silver Falls · Oregon</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="2" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/rodin.webp"><img src="assets/photos/rodin.jpg" width="1066" height="1600" loading="lazy" alt="Rodin's Three Shades between two conical hedges, the Eiffel Tower rising behind"/></picture><figcaption><span>Rodin garden · Paris</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="3" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-museum.webp"><img src="assets/photos/paris-museum.jpg" width="1067" height="1600" loading="lazy" alt="The Petit Palais gallery in late sun — frescoed vaults, rose marble columns, a winged bronze above the mosaic floor"/></picture><figcaption><span>Petit Palais · Paris</span><span class="film">DIGITAL</span></figcaption></figure>
-          <figure data-i="4" class="on" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-bridge.webp"><img src="assets/photos/paris-bridge.jpg" width="1068" height="1600" loading="lazy" alt="Pont Neuf lit amber at night over the Seine"/></picture><figcaption><span>Pont Neuf · Paris</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="5" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/empire-state.webp"><img src="assets/photos/empire-state.jpg" width="1068" height="1600" loading="lazy" alt="The Empire State Building at dusk, framed between dark silhouetted towers"/></picture><figcaption><span>Empire State · New York</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="6" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/el-nido.webp"><img src="assets/photos/el-nido.jpg" width="1024" height="1545" loading="lazy" alt="Limestone karsts and an outrigger boat ahead, seen from the deck of a bangka with a light leak haloing the frame"/></picture><figcaption><span>Island hopping · El Nido</span><span class="film">35MM</span></figcaption></figure>
-          <figure data-i="7" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/siargao.webp"><img src="assets/photos/siargao.jpg" width="1024" height="1545" loading="lazy" alt="Outrigger boats floating on turquoise reef water off a palm-lined shore in Siargao"/></picture><figcaption><span>Outriggers on the reef · Siargao</span><span class="film">35MM</span></figcaption></figure>
+          <figure data-i="0" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/san-juan.webp"><img src="assets/photos/san-juan.jpg" width="1024" height="1544" loading="lazy" alt="A white cottage with a shingle roof behind a picket fence and overgrown garden in San Juan Capistrano"/></picture><figcaption><span>Los Rios District · San Juan Capistrano</span></figcaption></figure>
+          <figure data-i="1" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/tall-firs.webp"><img src="assets/photos/tall-firs.jpg" width="1067" height="1600" loading="lazy" alt="Morning light breaking through tall mossy firs in an Oregon forest"/></picture><figcaption><span>Silver Falls · Oregon</span></figcaption></figure>
+          <figure data-i="2" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/rodin.webp"><img src="assets/photos/rodin.jpg" width="1066" height="1600" loading="lazy" alt="Rodin's Three Shades between two conical hedges, the Eiffel Tower rising behind"/></picture><figcaption><span>Rodin garden · Paris</span></figcaption></figure>
+          <figure data-i="3" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-museum.webp"><img src="assets/photos/paris-museum.jpg" width="1067" height="1600" loading="lazy" alt="The Petit Palais gallery in late sun — frescoed vaults, rose marble columns, a winged bronze above the mosaic floor"/></picture><figcaption><span>Petit Palais · Paris</span></figcaption></figure>
+          <figure data-i="4" class="on" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/paris-bridge.webp"><img src="assets/photos/paris-bridge.jpg" width="1068" height="1600" loading="lazy" alt="Pont Neuf lit amber at night over the Seine"/></picture><figcaption><span>Pont Neuf · Paris</span></figcaption></figure>
+          <figure data-i="5" style="--ar:.67"><picture><source type="image/webp" srcset="assets/photos/empire-state.webp"><img src="assets/photos/empire-state.jpg" width="1068" height="1600" loading="lazy" alt="The Empire State Building at dusk, framed between dark silhouetted towers"/></picture><figcaption><span>Empire State · New York</span></figcaption></figure>
+          <figure data-i="6" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/el-nido.webp"><img src="assets/photos/el-nido.jpg" width="1024" height="1545" loading="lazy" alt="Limestone karsts and an outrigger boat ahead, seen from the deck of a bangka with a light leak haloing the frame"/></picture><figcaption><span>Island hopping · El Nido</span></figcaption></figure>
+          <figure data-i="7" style="--ar:.66"><picture><source type="image/webp" srcset="assets/photos/siargao.webp"><img src="assets/photos/siargao.jpg" width="1024" height="1545" loading="lazy" alt="Outrigger boats floating on turquoise reef water off a palm-lined shore in Siargao"/></picture><figcaption><span>Outriggers on the reef · Siargao</span></figcaption></figure>
         </div>
         <p class="hu-name">Henry's Uncle</p>
         <p class="hu-tag">the greatest band you've never heard of</p>
@@ -858,7 +873,11 @@ footer{
         </div>
       </div>
       <div class="hpanel" id="hp-b" role="tabpanel" aria-labelledby="ht-b">
-        <ul class="hlist">
+        <section class="hnow" aria-labelledby="hg-now">
+          <p class="hgroup" id="hg-now"><span class="hnow-dot" aria-hidden="true"></span>currently reading</p>
+          <p class="hnow-book"><span class="ti">Dune</span>, Frank Herbert</p>
+        </section>
+        <ul class="hlist hcols">
           <li><span class="ti">The Republic</span>, Plato</li>
           <li><span class="ti">Grapes of Wrath</span>, John Steinbeck</li>
           <li><span class="ti">Rich Dad Poor Dad</span>, Robert Kiyosaki</li>
