@@ -533,6 +533,53 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 @media (min-width:481px) and (max-width:600px){ .hu{margin-left:calc(-1.5rem - 24px)} }
 @media (prefers-reduced-motion:reduce){ .hu-tile{opacity:1;transform:none;transition:none} }
 
+/* ── the new EP — a release panel, staged like the Shakedown fold ──
+   crop-line type rises beside a sleeve that scales in, and the sleeve
+   itself is scroll-linked: --p runs 0 (panel entering from the bottom)
+   → 1 (leaving at the top), set in JS, and the art drifts against the
+   page across that range. the overscan on the picture is what keeps
+   the drift from opening a gap at either edge. */
+.hu-rel{display:grid;gap:1.05rem;align-items:center;max-width:34rem;margin:1.7rem auto 0}
+.hu-rel+.hu{margin-top:1.4rem}
+@media (min-width:640px){ .hu-rel{grid-template-columns:minmax(0,13.5rem) 1fr;gap:1.5rem} }
+.hu-rel-art{position:relative;overflow:hidden;border-radius:8px;aspect-ratio:1;
+  background:var(--card);border:1px solid var(--rule);
+  opacity:0;transform:scale(1.03);
+  transition:opacity .7s ease .24s,transform .9s cubic-bezier(.22,1,.36,1) .24s}
+.dbody.open .hu-rel-art{opacity:1;transform:none}
+.hu-rel-art picture{position:absolute;inset:-12% 0;display:block}
+/* amplitude is 8% of the picture's own height (1.24× the panel), so the
+   drift stays inside the 12% overscan with a couple of px to spare */
+.hu-rel-art img{width:100%;height:100%;object-fit:cover;
+  transform:translate3d(0,calc((var(--p,.5) - .5) * 16%),0)}
+.hu-rel-copy{min-width:0}
+.hu-rel-line{display:block;overflow:hidden}
+.hu-rel-line>span{display:block;transform:translateY(118%);
+  transition:transform .8s cubic-bezier(.22,1,.36,1) var(--d,0s)}
+.dbody.open .hu-rel-line>span{transform:none}
+.hu-rel-eyebrow{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--coral-deep)}
+.hu-rel-t{font-family:var(--font-display);font-style:italic;line-height:1.16;
+  font-size:clamp(1.45rem,3.6vw,1.9rem);color:var(--head);padding-bottom:.06em}
+:root[data-theme="dark"] .hu-rel-t{color:var(--ink)}
+.hu-rel-copy p{margin-top:.55rem;font-size:.8438rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s ease .4s,transform .55s cubic-bezier(.22,1,.36,1) .4s}
+.dbody.open .hu-rel-copy p{opacity:1;transform:none}
+/* closing — the cascade runs backwards, same as the Shakedown fold */
+.dbody.gathering .hu-rel-line>span{transform:translateY(118%);
+  transition:transform .4s cubic-bezier(.55,.06,.68,.19) .08s}
+.dbody.gathering .hu-rel-copy p{opacity:0;transform:translateY(7px);
+  transition:opacity .26s ease,transform .26s ease}
+.dbody.gathering .hu-rel-art{opacity:0;transform:scale(1.02);
+  transition:opacity .32s ease .12s,transform .46s cubic-bezier(.55,.06,.68,.19) .12s}
+@media (max-width:639px){ .hu-rel-art{width:min(74%,14rem);justify-self:center} }
+@media (prefers-reduced-motion:reduce){
+  .hu-rel-art,.hu-rel-copy p{opacity:1;transform:none;transition:none}
+  .hu-rel-line>span{transform:none;transition:none}
+  .hu-rel-art img{transform:none}
+}
+
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;background:var(--lb);display:none;
   align-items:center;justify-content:center;flex-direction:column;padding:3.2rem 1rem 2.4rem}
@@ -789,14 +836,27 @@ footer{
         <p class="hu-tag">the greatest band you've never heard of</p>
         <div class="hu-intro">
           <div class="hu-copy">
-            <p>A three-piece power trio through college — 30-plus shows booked, promoted, and played, with a radio show along the way. Two self-produced releases, and a third in the works.</p>
+            <p>A three-piece power trio through college — 30-plus shows booked, promoted, and played, with a radio show along the way. Two self-produced releases, and a third just finished.</p>
             <div class="hu-links">
               <a class="hu-btn" href="https://open.spotify.com/search/Henry's%20Uncle" target="_blank" rel="noopener" aria-label="Henry's Uncle on Spotify"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>Spotify</a>
               <a class="hu-btn" href="https://youtube.com/@jeremymitaux" target="_blank" rel="noopener" aria-label="Jeremy's YouTube channel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.5 3 3 0 0 0 2.1 2.1C4.5 20 12 20 12 20s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.5ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg>YouTube</a>
             </div>
           </div>
-          <figure class="hu-ep"><picture><source type="image/webp" srcset="assets/media/hu/hu-cover.webp"><img src="assets/media/hu/hu-cover.jpg" width="640" height="640" loading="lazy" alt="Henry's Uncle EP cover"/></picture><figcaption>the ep · self-produced</figcaption></figure>
+          <figure class="hu-ep"><picture><source type="image/webp" srcset="assets/media/hu/hu-cover.webp"><img src="assets/media/hu/hu-cover.jpg" width="640" height="640" loading="lazy" alt="The From the Bedroom&hellip; It&rsquo;s Henry&rsquo;s Uncle sleeve: the band in blue-tinted blur behind the wordmark"/></picture><figcaption>From the Bedroom&hellip;</figcaption></figure>
         </div>
+        <section class="hu-rel" aria-label="Henry &amp; Harold, the new EP">
+          <div class="hu-rel-art">
+            <picture>
+              <source type="image/webp" srcset="assets/media/hu/hu-hh.webp">
+              <img src="assets/media/hu/hu-hh.jpg" width="900" height="900" loading="lazy" alt="The Henry &amp; Harold sleeve: a long exposure of a guitarist under stage light, smeared into teal streaks"/>
+            </picture>
+          </div>
+          <div class="hu-rel-copy">
+            <span class="hu-rel-line"><span class="hu-rel-eyebrow">new EP</span></span>
+            <span class="hu-rel-line" style="--d:.06s"><span class="hu-rel-t">Henry &amp; Harold</span></span>
+            <p>Our second self-produced release</p>
+          </div>
+        </section>
         <div class="hu" id="huMq" role="group" aria-label="Henry's Uncle, on the ground">
           <div class="hu-mq" data-v="42">
             <div class="hu-track">
@@ -1234,6 +1294,38 @@ function initMarquee(host){
 }
 initMarquee(document.getElementById('huMq'));
 initMarquee(document.getElementById('ogMq'));
+
+/* ── the new-EP sleeve — scroll-linked drift ──
+   --p is the panel's progress across the viewport, 0 (its top just
+   entering at the bottom) → 1 (its bottom just leaving at the top);
+   CSS turns that into the sleeve's travel. reads the rect on a single
+   rAF per scroll, and only while the fold is open and the panel is in
+   view — the closed fold collapses to zero height, so the IO doubles
+   as the open/closed sensor the way the marquee's does. */
+(function(){
+  var art=document.querySelector('.hu-rel-art');
+  if(!art||reduce) return;
+  var seen=false,queued=false;
+  function paint(){
+    queued=false;
+    if(!seen) return;
+    var r=art.getBoundingClientRect(), vh=window.innerHeight;
+    if(!r.height) return;
+    var p=(vh-r.top)/(vh+r.height);
+    art.style.setProperty('--p',(p<0?0:p>1?1:p).toFixed(3));
+  }
+  function sched(){ if(!queued){ queued=true; requestAnimationFrame(paint); } }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      var e=es[0];
+      seen=e.isIntersecting&&e.boundingClientRect.height>0;
+      if(seen) sched();
+    }).observe(art);
+  }else{ seen=true; }
+  window.addEventListener('scroll',sched,{passive:true});
+  window.addEventListener('resize',sched);
+  sched();
+})();
 
 /* ── interlude tabs — the record ── */
 (function(){
