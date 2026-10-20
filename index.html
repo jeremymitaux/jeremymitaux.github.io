@@ -173,6 +173,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 
 /* ═══════════ SECTIONS (disclosures) ═══════════ */
 .stack{margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+/* the fold labels are the page's section headings — h2 so the document
+   has an outline to navigate by. .dlabel still owns the type, so the
+   heading element changes nothing visually. */
+.dhead{margin:0;font:inherit}
 
 .dtrig{display:inline-flex;align-items:center;gap:10px;cursor:pointer;color:var(--head);padding:2px 0}
 .dtrig .wv{width:17px;height:17px;color:var(--wave);flex:none;
@@ -342,7 +346,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   border-bottom:1px solid transparent;transition:color .2s ease}
 :root[data-theme="dark"] .htab{color:var(--ink)}
 .htab:hover{color:var(--coral-deep)}
-.htab[aria-selected="true"]{color:var(--coral-deep);border-bottom-color:color-mix(in oklab,var(--coral) 55%,transparent)}
+.htab[aria-expanded="true"]{color:var(--coral-deep);border-bottom-color:color-mix(in oklab,var(--coral) 55%,transparent)}
 .htab-sep{width:1px;height:12px;background:var(--rule);margin:0 .85rem}
 /* the three tabs don't fit one line under ~460px, and a wrapped row left a
    pipe orphaned at the head of line two — drop the rules, let gap space them */
@@ -709,7 +713,7 @@ footer{
     <div class="head-row">
       <div>
         <h1 class="name"><em>Jeremy Mitaux</em></h1>
-        <p class="updated">Updated September 8, 2026</p>
+        <p class="updated">Updated October 19, 2026</p>
       </div>
       <div class="mode">
         <span class="mode-cap" id="modeCap">PAPER MODE</span>
@@ -731,14 +735,14 @@ footer{
   <div class="rv stack" style="transition-delay:.14s">
 
     <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-oregon">
+      <h2 class="dhead"><button class="dtrig" aria-expanded="false" aria-controls="d-oregon">
         <svg class="wv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10L12 5L3 10L6 11.6667M21 10L18 11.6667M21 10V10C21.6129 10.3064 22 10.9328 22 11.618V16.9998M6 11.6667L12 15L18 11.6667M6 11.6667V17.6667L12 21L18 17.6667L18 11.6667"/></svg>
         <span class="dlabel" data-glitch>at Oregon</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
-      </button>
+      </button></h2>
       <div class="dbody dbody-wide"><div class="dinner" id="d-oregon" inert><div class="dpad">
         <div class="dpad-intro">
-        <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1545" height="1024" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026</figcaption></figure>
+        <figure class="dphoto"><picture><source type="image/webp" srcset="assets/photos/grad-autzen.webp"><img src="assets/photos/grad-autzen.jpg" width="1024" height="679" loading="lazy" alt="Autzen Stadium graduation"/></picture><figcaption>eugene, june 2026</figcaption></figure>
         <p>I received my B.S. in Data Science from the University of Oregon in 2026, where I served as Director of Venture Capital for the Oregon Blockchain Group and External VP of Chi Psi Fraternity.</p>
         <p>I'm interested in how emerging technologies reshape institutions, markets, and ultimately how they affect the human experience. That question feels like the defining challenge of this century.</p>
         </div>
@@ -757,11 +761,11 @@ footer{
     </div>
 
     <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-built">
+      <h2 class="dhead"><button class="dtrig" aria-expanded="false" aria-controls="d-built">
         <svg class="wv" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.13861 8.5856C3.10395 8.79352 3.07799 8.98444 3.05852 9.15412C2.89911 9.20305 2.72733 9.2683 2.55279 9.35557C2.18416 9.53989 1.78511 9.83206 1.48045 10.2891C1.17162 10.7523 1 11.325 1 12C1 12.675 1.17162 13.2477 1.48045 13.7109C1.78511 14.1679 2.18416 14.4601 2.55279 14.6444C2.72733 14.7317 2.89911 14.7969 3.05852 14.8459C3.07798 15.0156 3.10395 15.2065 3.13861 15.4144C3.27452 16.2299 3.54822 17.3325 4.10557 18.4472C4.66489 19.5658 5.51956 20.7149 6.8203 21.5821C8.1273 22.4534 9.82502 23 12 23C14.175 23 15.8727 22.4534 17.1797 21.5821C18.4804 20.7149 19.3351 19.5658 19.8944 18.4472C20.4518 17.3325 20.7255 16.2299 20.8614 15.4144C20.896 15.2065 20.922 15.0156 20.9415 14.8459C21.1009 14.7969 21.2727 14.7317 21.4472 14.6444C21.8158 14.4601 22.2149 14.1679 22.5196 13.7109C22.8284 13.2477 23 12.675 23 12C23 11.325 22.8284 10.7523 22.5196 10.2891C22.2149 9.83206 21.8158 9.53989 21.4472 9.35557C21.2727 9.2683 21.1009 9.20305 20.9415 9.15412C20.922 8.98444 20.896 8.79352 20.8614 8.5856C20.7255 7.77011 20.4518 6.6675 19.8944 5.55278C19.3351 4.43416 18.4804 3.28511 17.1797 2.41795C15.8727 1.54662 14.175 1 12 1C9.82502 1 8.1273 1.54662 6.8203 2.41795C5.51957 3.28511 4.66489 4.43416 4.10558 5.55279C3.54822 6.6675 3.27452 7.77011 3.13861 8.5856ZM18.9025 15H5.09753C5.20639 15.692 5.43305 16.63 5.89443 17.5528C6.33511 18.4342 6.98044 19.2851 7.9297 19.9179C8.8727 20.5466 10.175 21 12 21C13.825 21 15.1273 20.5466 16.0703 19.9179C17.0196 19.2851 17.6649 18.4342 18.1056 17.5528C18.5669 16.63 18.7936 15.692 18.9025 15ZM18.9025 9H18C17.4477 9 17 9.44771 17 10C17 10.5523 17.4477 11 18 11H20C20.3084 11.012 20.6759 11.1291 20.8554 11.3984C20.9216 11.4977 21 11.675 21 12C21 12.325 20.9216 12.5023 20.8554 12.6016C20.6759 12.8709 20.3084 12.988 20 13H4C3.69155 12.988 3.32414 12.8709 3.14455 12.6016C3.07838 12.5023 3 12.325 3 12C3 11.675 3.07838 11.4977 3.14455 11.3984C3.32414 11.1291 3.69155 11.012 4 11H6C6.55228 11 7 10.5523 7 10C7 9.44771 6.55228 9 6 9H5.09753C5.20639 8.30804 5.43306 7.36996 5.89443 6.44721C6.33512 5.56584 6.98044 4.71489 7.92971 4.08205C8.24443 3.87224 8.59917 3.68195 9 3.52152V6C9 6.55228 9.44771 7 10 7C10.5523 7 11 6.55228 11 6V3.04872C11.3146 3.01691 11.6476 3 12 3C12.3524 3 12.6854 3.01691 13 3.04872V6C13 6.55228 13.4477 7 14 7C14.5523 7 15 6.55228 15 6V3.52152C15.4008 3.68195 15.7556 3.87224 16.0703 4.08205C17.0196 4.71489 17.6649 5.56584 18.1056 6.44721C18.5669 7.36996 18.7936 8.30804 18.9025 9Z"/></svg>
         <span class="dlabel" data-glitch>building</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
-      </button>
+      </button></h2>
       <div class="dbody dbody-wide"><div class="dinner" id="d-built" inert><div class="dpad">
         <div class="sk">
 
@@ -864,11 +868,11 @@ footer{
          commit (1e80093), id d-experience, and fill the roster before shipping. -->
 
     <div>
-      <button class="dtrig" aria-expanded="false" aria-controls="d-photo">
+      <h2 class="dhead"><button class="dtrig" aria-expanded="false" aria-controls="d-photo">
         <svg class="wv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16C13.6569 16 15 14.6569 15 13C15 11.3431 13.6569 10 12 10C10.3431 10 9 11.3431 9 13C9 14.6569 10.3431 16 12 16Z"/><path d="M3 16.8V9.2C3 8.0799 3 7.51984 3.21799 7.09202C3.40973 6.71569 3.71569 6.40973 4.09202 6.21799C4.51984 6 5.0799 6 6.2 6H7.25464C7.37758 6 7.43905 6 7.49576 5.9935C7.79166 5.95961 8.05705 5.79559 8.21969 5.54609C8.25086 5.49827 8.27836 5.44328 8.33333 5.33333C8.44329 5.11342 8.49827 5.00346 8.56062 4.90782C8.8859 4.40882 9.41668 4.08078 10.0085 4.01299C10.1219 4 10.2448 4 10.4907 4H13.5093C13.7552 4 13.8781 4 13.9915 4.01299C14.5833 4.08078 15.1141 4.40882 15.4394 4.90782C15.5017 5.00345 15.5567 5.11345 15.6667 5.33333C15.7216 5.44329 15.7491 5.49827 15.7803 5.54609C15.943 5.79559 16.2083 5.95961 16.5042 5.9935C16.561 6 16.6224 6 16.7454 6H17.8C18.9201 6 19.4802 6 19.908 6.21799C20.2843 6.40973 20.5903 6.71569 20.782 7.09202C21 7.51984 21 8.0799 21 9.2V16.8C21 17.9201 21 18.4802 20.782 18.908C20.5903 19.2843 20.2843 19.5903 19.908 19.782C19.4802 20 18.9201 20 17.8 20H6.2C5.0799 20 4.51984 20 4.09202 19.782C3.71569 19.5903 3.40973 19.2843 3.21799 18.908C3 18.4802 3 17.9201 3 16.8Z"/></svg>
         <span class="dlabel" data-glitch>life in 50mm</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
-      </button>
+      </button></h2>
       <div class="dbody dbody-wide"><div class="dinner" id="d-photo" inert><div class="dpad">
         <p style="margin-bottom:.8rem">The stock lens on the AE-1 is a prime 50mm f1.8. My favorite thing about this lens is the limitations it places on you. Want to zoom out? Use your feet. Moreover, it is said that the human eye sees somewhere between 40mm and 50mm. I like to think of this as the most human form of photography.</p>
         <div class="pgrid" id="pgrid">
@@ -934,15 +938,18 @@ footer{
   <section class="rv inter" style="transition-delay:.20s" aria-label="A running record of what I hear, watch, read, and live by">
     <p class="inter-lede">The world we've built is discrete. The lives we live are continuous.</p>
     <p class="inter-sub">A look into what inspires me</p>
-    <div class="htabs" role="tablist" aria-label="The record">
-      <button class="htab" id="ht-q" role="tab" aria-selected="false" aria-controls="hp-q" data-glitch>quotes I live by</button>
+    <!-- these were role="tab" for a while, but they behave like disclosures:
+         clicking the open one closes it, and there is no arrow-key roving.
+         aria-expanded describes what they actually do. -->
+    <div class="htabs" role="group" aria-label="The record">
+      <button class="htab" id="ht-q" aria-expanded="false" aria-controls="hp-q" data-glitch>quotes I live by</button>
       <span class="htab-sep" aria-hidden="true"></span>
-      <button class="htab" id="ht-a" role="tab" aria-selected="false" aria-controls="hp-a" data-glitch>listening &amp; watching</button>
+      <button class="htab" id="ht-a" aria-expanded="false" aria-controls="hp-a" data-glitch>listening &amp; watching</button>
       <span class="htab-sep" aria-hidden="true"></span>
-      <button class="htab" id="ht-b" role="tab" aria-selected="false" aria-controls="hp-b" data-glitch>my bookshelf</button>
+      <button class="htab" id="ht-b" aria-expanded="false" aria-controls="hp-b" data-glitch>my bookshelf</button>
     </div>
     <div class="hstage" id="hstage"><div class="hstage-inner" id="hstageInner" inert>
-      <div class="hpanel" id="hp-q" role="tabpanel" aria-labelledby="ht-q">
+      <div class="hpanel" id="hp-q" aria-labelledby="ht-q">
         <ul class="hlist hcols">
           <li class="hquote">“Climb the mountain not so the world can see you, but so you can see the world.”<span class="by">David McCullough Jr.</span></li>
           <li class="hquote">“And now that you don't have to be perfect, you can be good.”<span class="by">John Steinbeck, East of Eden</span></li>
@@ -952,7 +959,7 @@ footer{
           <li class="hquote">“Love takes miles.”<span class="by">Cameron Winter</span></li>
         </ul>
       </div>
-      <div class="hpanel" id="hp-a" role="tabpanel" aria-labelledby="ht-a">
+      <div class="hpanel" id="hp-a" aria-labelledby="ht-a">
         <div class="hlist hcols">
           <section class="hgrp" aria-labelledby="hg-records">
             <p class="hgroup" id="hg-records">my desert island collection</p>
@@ -981,7 +988,7 @@ footer{
           </section>
         </div>
       </div>
-      <div class="hpanel" id="hp-b" role="tabpanel" aria-labelledby="ht-b">
+      <div class="hpanel" id="hp-b" aria-labelledby="ht-b">
         <section class="hnow" aria-labelledby="hg-now">
           <p class="hgroup" id="hg-now"><span class="hnow-dot" aria-hidden="true"></span>currently reading</p>
           <p class="hnow-book"><span class="ti">Dune</span>, Frank Herbert</p>
@@ -1002,10 +1009,10 @@ footer{
 
   <!-- ── writing & research ── -->
   <section class="rv wsec" style="transition-delay:.26s" aria-label="Writing and research">
-    <div class="whead">
+    <h2 class="whead dhead">
       <svg class="wv" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M275.602,346.18c0-155.063,47.628-176.776,47.628-238.215c0-54.614-38.926-93.177-67.23-107.964c-28.305,14.788-67.239,53.351-67.239,107.964c0,61.44,47.628,83.152,47.628,238.215H275.602z"/><path d="M185.388,346.18h31.359c0,0,6.547-141.584-81.028-161.194c-90.055-20.155-128.082,107.178-57.51,149C84.75,239.886,185.388,246.418,185.388,346.18z"/><path d="M376.278,184.985c-87.567,19.61-81.036,161.194-81.036,161.194h31.367c0-99.762,100.638-106.294,107.178-12.194C504.367,292.163,466.332,164.83,376.278,184.985z"/><polygon points="131.833,356.204 131.833,386.262 255.999,386.262 380.171,386.262 380.171,356.204 255.999,356.204"/><path d="M278.217,395.674h-44.445c0,18.303-23.519,50.977-60.118,52.278c0,22.226,42.956,29.196,57.857,19.611c0,0-1.656,33.982,24.487,44.437c26.142-10.456,24.487-44.437,24.487-44.437c14.901,9.585,57.856,2.616,57.856-19.611C301.744,446.652,278.217,413.977,278.217,395.674z"/></svg>
       <span class="dlabel" data-glitch>writing &amp; research</span>
-    </div>
+    </h2>
     <ul class="wlist">
       <li class="wrow"><a class="t" href="reports_docs/Railgun%20Fund%20Report.pdf" target="_blank" rel="noopener">Railgun — $RAIL</a><span class="k">fund report · may 2026</span></li>
       <li class="wrow"><a class="t" href="reports_docs/Pendle%20Fund%20Report%20New.pdf" target="_blank" rel="noopener">Pendle — $PENDLE</a><span class="k">fund report · feb 2026</span></li>
@@ -1137,11 +1144,24 @@ var figs=[].slice.call(document.querySelectorAll('#pgrid figure'));
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'),
     lbCap=document.getElementById('lbCap'), lbNum=document.getElementById('lbNum');
 var cur=0, lastFocus=null;
+/* serve the lightbox exactly the file the page already has. img.src is
+   the <img> jpeg fallback, but every frame renders from its webp
+   <source> — reading .src made opening the strip re-download ~2MB of
+   photos the browser had just painted. currentSrc is what the browser
+   actually picked, once the frame has loaded; the srcset covers the
+   ones still lazy. */
+function srcFor(f){
+  var img=f.querySelector('img');
+  if(img.currentSrc) return img.currentSrc;
+  var src=f.querySelector('source[type="image/webp"]');
+  var ss=src&&src.getAttribute('srcset');
+  return ss?ss.split(',')[0].trim().split(/\s+/)[0]:img.src;
+}
 function toShots(list){
   return list.map(function(f){
     var img=f.querySelector('img');
     var cap=f.querySelector('figcaption span')||f.querySelector('figcaption');
-    return {jpg:img.src, alt:img.alt, cap:cap?cap.textContent:img.alt};
+    return {fig:f, alt:img.alt, cap:cap?cap.textContent:img.alt};
   });
 }
 var shots=toShots(figs);
@@ -1149,7 +1169,7 @@ var set=shots;
 function show(i){
   cur=(i+set.length)%set.length;
   var s=set[cur];
-  lbImg.src=s.jpg; lbImg.alt=s.alt; lbCap.textContent=s.cap;
+  lbImg.src=srcFor(s.fig); lbImg.alt=s.alt; lbCap.textContent=s.cap;
   lbNum.textContent=(cur+1)+' / '+set.length;
 }
 /* iOS ignores overflow:hidden on the body, so the page scrolled on under
@@ -1501,8 +1521,8 @@ wireStrip(document.getElementById('ogMq'));
   }
   htabs.forEach(function(btn){
     btn.addEventListener('click',function(){
-      var close=btn.getAttribute('aria-selected')==='true'&&hstage.classList.contains('open');
-      htabs.forEach(function(t){t.setAttribute('aria-selected',String(!close&&t===btn));});
+      var close=btn.getAttribute('aria-expanded')==='true'&&hstage.classList.contains('open');
+      htabs.forEach(function(t){t.setAttribute('aria-expanded',String(!close&&t===btn));});
       stage(close?null:document.getElementById(btn.getAttribute('aria-controls')));
     });
   });
