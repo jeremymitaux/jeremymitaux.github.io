@@ -20,16 +20,19 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Jeremy Mitaux" />
 <meta property="og:description" content="Building Shakedown from Manila — on-chain ticketing born from four years of fronting a band. Fund reports, film photos, and the greatest band you've never heard of." />
-<meta property="og:image" content="https://jeremymitaux.com/assets/media/og-card.jpg" />
+<meta property="og:image" content="https://jeremymitaux.com/assets/media/og-autzen.jpg" />
+<meta property="og:image:secure_url" content="https://jeremymitaux.com/assets/media/og-autzen.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Jeremy Mitaux at a window over the city, film camera on a blue table." />
+<meta property="og:image:alt" content="Autzen Stadium above a crowd of green graduation caps, Eugene, June 2026." />
 <meta property="og:url" content="https://jeremymitaux.com/" />
 <meta property="og:site_name" content="jeremymitaux" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Jeremy Mitaux" />
 <meta name="twitter:description" content="Building Shakedown from Manila. One signal, one ocean." />
-<meta name="twitter:image" content="https://jeremymitaux.com/assets/media/og-card.jpg" />
+<meta name="twitter:image" content="https://jeremymitaux.com/assets/media/og-autzen.jpg" />
+<meta name="twitter:image:alt" content="Autzen Stadium above a crowd of green graduation caps, Eugene, June 2026." />
 
 <link rel="icon" href="fleur-de-lis-1-svgrepo-com.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="fleur-de-lis-1-svgrepo-com.svg" />
@@ -91,6 +94,7 @@ document.documentElement.dataset.theme=t;}catch(e){document.documentElement.data
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
   /* folds change page height — keep the gutter reserved and the bar quiet
      so opening a section doesn't slam a scrollbar in and shift the column */
   scrollbar-gutter:stable;scrollbar-width:thin;
@@ -155,9 +159,17 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 :root[data-theme="dark"] .mode-knob .ic-paper{display:none}
 :root[data-theme="dark"] .mode-knob .ic-ink{display:block}
 
-/* greek glitch */
-[data-glitch]{transition:color .2s ease}
+/* greek glitch — the scramble rides in its own absolutely-positioned
+   layer while the latin underneath keeps holding the box open. the greek
+   lookalikes run up to 12% wider than their latin counterparts, so
+   swapping the live text node shoved the chevrons and the whole tab row
+   sideways every time a label glitched. */
+[data-glitch]{position:relative;transition:color .2s ease}
 [data-glitch].glitching{color:var(--coral-deep)}
+.gk-ov{position:absolute;left:0;top:0;padding:inherit;white-space:nowrap;
+  visibility:hidden;pointer-events:none}
+[data-glitch].glitching .gk-base{visibility:hidden}
+[data-glitch].glitching .gk-ov{visibility:visible}
 
 /* ═══════════ SECTIONS (disclosures) ═══════════ */
 .stack{margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
@@ -332,6 +344,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .htab:hover{color:var(--coral-deep)}
 .htab[aria-selected="true"]{color:var(--coral-deep);border-bottom-color:color-mix(in oklab,var(--coral) 55%,transparent)}
 .htab-sep{width:1px;height:12px;background:var(--rule);margin:0 .85rem}
+/* the three tabs don't fit one line under ~460px, and a wrapped row left a
+   pipe orphaned at the head of line two — drop the rules, let gap space them */
+@media (max-width:460px){
+  .htabs{gap:.1rem 1.15rem}
+  .htab-sep{display:none}
+}
 .hstage{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
 .hstage.open{grid-template-rows:1fr}
 .hstage-inner{overflow:hidden;min-height:0}
@@ -468,11 +486,17 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .pgrid figure.on figcaption{opacity:1;transform:none;transition-delay:.18s}
 .pgrid figcaption span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pgrid .film{font-family:"Space Mono",monospace;font-size:8.5px;letter-spacing:.16em;color:rgba(242,238,227,.72);flex:none}
+/* on a phone the expanding strip collapsed to seven 36px slivers and one
+   letterboxed frame — a portrait negative cropped down to a horizontal
+   sliver of itself, with no hover to open it with. so below 600px the
+   strip becomes a two-up contact sheet at each photo's own aspect, and a
+   tap goes straight to the lightbox. the gather still plays, gentler:
+   94% of a 250px tile would fling the frames a thousand pixels. */
 @media (max-width:600px){
-  .pgrid{flex-direction:column;height:min(74vh,32rem)}
-  .pgrid figure{transform:translateY(calc(var(--k)*94%))}
-  .pgrid figure.on{flex:5.5 1 0%}
-  .dbody.gathering .pgrid figure{transform:translateY(calc(var(--k)*94%))}
+  .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;height:auto}
+  .pgrid figure{aspect-ratio:var(--ar,.67);transform:translateY(calc(var(--k)*34%))}
+  .dbody.gathering .pgrid figure{transform:translateY(calc(var(--k)*34%))}
+  .pgrid figcaption{display:none}  /* the caption travels with the photo into the lightbox */
 }
 @media (prefers-reduced-motion:reduce){
   .pgrid figure{opacity:1;transform:none;transition:none}
@@ -520,6 +544,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   transition:transform .5s cubic-bezier(.55,.06,.68,.19) calc(.55s - var(--dd,.3s)),
     opacity .35s ease calc(.58s - var(--dd,.3s))}
 .hu-tile img,.hu-tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hu-tile[role="button"]{cursor:pointer}
 /* the at-Oregon strip — same marquee, one quiet row, tighter and shorter */
 .og{margin-top:.9rem;clear:both}
 .og .hu-tile{height:clamp(5.75rem,13vw,8rem)}
@@ -529,6 +554,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
   .hu-ep{width:min(60%,12rem)}
   .hu-links{justify-content:center}
   .hu{margin-inline:-1.5rem}
+  /* the strips run full-bleed here, so they can afford a taller tile —
+     at 116px/92px the faces in them were unreadable */
+  .hu-tile{height:9.75rem}
+  .og .hu-tile{height:7.5rem}
 }
 @media (min-width:481px) and (max-width:600px){ .hu{margin-left:calc(-1.5rem - 24px)} }
 @media (prefers-reduced-motion:reduce){ .hu-tile{opacity:1;transform:none;transition:none} }
@@ -582,7 +611,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;background:var(--lb);display:none;
-  align-items:center;justify-content:center;flex-direction:column;padding:3.2rem 1rem 2.4rem}
+  align-items:center;justify-content:center;flex-direction:column;padding:3.2rem 1rem 2.4rem;
+  overscroll-behavior:contain}
 .lb.on{display:flex}
 .lb img{max-width:min(94vw,60rem);max-height:76vh;width:auto;border-radius:4px;
   box-shadow:0 30px 90px rgba(0,0,0,.5)}
@@ -594,6 +624,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0}
 .lb-x{top:14px;right:16px}
 .lb-p{left:8px;top:50%;transform:translateY(-50%)}
 .lb-nx{right:8px;top:50%;transform:translateY(-50%)}
+/* on a phone the arrows sit on top of the photo — give them a disc to
+   read against, and a thumb-sized target. swipe works too (see JS). */
+@media (max-width:600px){
+  .lb{padding:3.4rem .5rem 1.2rem}
+  .lb img{max-width:100%;max-height:70vh}
+  .lb button{display:grid;place-items:center;width:44px;height:44px;padding:0;
+    border-radius:999px;background:rgba(8,14,22,.55);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .lb-p{left:4px} .lb-nx{right:4px} .lb-x{top:10px;right:10px}
+}
 
 /* ═══════════ FOOTER ═══════════
    spacing scale — tight inside a group, generous between groups.
@@ -630,8 +670,17 @@ footer{
 :root[data-theme="dark"] .clk .t{color:var(--ink)}
 .clk .t .co{color:var(--faint)}
 
-/* short screens — compress the between-group rhythm, keep the scale responsive */
-@media (max-height: 800px){
+/* thumb targets — 29px rows are a miss on a phone; pad them to ~44 */
+@media (max-width:600px){
+  .dtrig{padding:7px 0}
+  .htab{padding:8px 2px}
+  .sk-step-t{padding:.78rem 2px}
+}
+
+/* short screens — compress the between-group rhythm, keep the scale responsive.
+   width-gated: a phone in portrait is a short screen too, and shrinking the
+   root to 13px on an iPhone SE made the whole page harder to read. */
+@media (min-width:601px) and (max-height: 800px){
   .col{ padding-block: 1rem; }
   .stack{ margin-top: .5rem; gap: .35rem; }
   .inter{ margin-top: 1rem; }
@@ -643,7 +692,7 @@ footer{
     --gap-sm: clamp(.6rem, 1.5vh, 1rem);
   }
 }
-@media (max-height: 680px){
+@media (min-width:601px) and (max-height: 680px){
   html{ font-size: 13px; }   /* one gentle step, not two */
 }
 </style>
@@ -1091,7 +1140,8 @@ var cur=0, lastFocus=null;
 function toShots(list){
   return list.map(function(f){
     var img=f.querySelector('img');
-    return {jpg:img.src, alt:img.alt, cap:f.querySelector('figcaption span').textContent};
+    var cap=f.querySelector('figcaption span')||f.querySelector('figcaption');
+    return {jpg:img.src, alt:img.alt, cap:cap?cap.textContent:img.alt};
   });
 }
 var shots=toShots(figs);
@@ -1102,26 +1152,38 @@ function show(i){
   lbImg.src=s.jpg; lbImg.alt=s.alt; lbCap.textContent=s.cap;
   lbNum.textContent=(cur+1)+' / '+set.length;
 }
+/* iOS ignores overflow:hidden on the body, so the page scrolled on under
+   the lightbox and you came back somewhere else — pin it and put it back. */
+var lockY=0;
 function openLb(i,from){
   set=from||shots;
   lastFocus=document.activeElement;
   lb.hidden=false; lb.classList.add('on'); show(i);
-  document.body.style.overflow='hidden';
+  lockY=window.scrollY;
+  var b=document.body.style;
+  b.position='fixed'; b.top=(-lockY)+'px'; b.left='0'; b.right='0'; b.overflow='hidden';
   document.getElementById('lbX').focus();
 }
 function closeLb(){
   lb.classList.remove('on'); lb.hidden=true;
-  document.body.style.overflow='';
+  var b=document.body.style;
+  b.position=''; b.top=''; b.left=''; b.right=''; b.overflow='';
+  var sb=root.style.scrollBehavior; root.style.scrollBehavior='auto';
+  window.scrollTo(0,lockY);
+  root.style.scrollBehavior=sb;
   if(lastFocus&&lastFocus.focus) lastFocus.focus();
 }
 /* expanding strip — hover/focus/tap opens a frame; activating the open frame goes full-size */
 function setShot(f){ figs.forEach(function(o){ o.classList.toggle('on',o===f); }); }
+var sheet=window.matchMedia('(max-width:600px)');
 figs.forEach(function(f,i){
   f.setAttribute('tabindex','0'); f.setAttribute('role','button');
   f.setAttribute('aria-label','View photo: '+shots[i].cap);
   f.addEventListener('pointerenter',function(e){ if(e.pointerType==='mouse') setShot(f); });
   f.addEventListener('focus',function(){ setShot(f); });
-  f.addEventListener('click',function(){ if(f.classList.contains('on')) openLb(i); else setShot(f); });
+  /* below 600px the strip is a contact sheet — every frame is already
+     open, so the first tap is the one that counts */
+  f.addEventListener('click',function(){ if(sheet.matches||f.classList.contains('on')) openLb(i); else setShot(f); });
   f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openLb(i);} });
 });
 /* the Shakedown phases — a step drives the panel; the panel drifts
@@ -1180,7 +1242,22 @@ figs.forEach(function(f,i){
 document.getElementById('lbX').addEventListener('click',closeLb);
 document.getElementById('lbP').addEventListener('click',function(){show(cur-1);});
 document.getElementById('lbN').addEventListener('click',function(){show(cur+1);});
-lb.addEventListener('click',function(e){ if(e.target===lb) closeLb(); });
+/* swipe — the only paging gesture that makes sense on a phone. the
+   swallow flag keeps the gesture's trailing click off the backdrop. */
+var swX=null,swY=null,swallow=false;
+lb.addEventListener('touchstart',function(e){
+  var t=e.changedTouches[0]; swX=t.clientX; swY=t.clientY; swallow=false;
+},{passive:true});
+lb.addEventListener('touchend',function(e){
+  if(swX===null) return;
+  var t=e.changedTouches[0], dx=t.clientX-swX, dy=t.clientY-swY;
+  swX=null;
+  if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.6){ swallow=true; show(cur+(dx<0?1:-1)); }
+},{passive:true});
+lb.addEventListener('click',function(e){
+  if(swallow){ swallow=false; return; }
+  if(e.target===lb) closeLb();
+});
 document.addEventListener('keydown',function(e){
   if(lb.hidden) return;
   if(e.key==='Escape') closeLb();
@@ -1234,6 +1311,7 @@ function initMarquee(host){
       s.seq.forEach(function(t){
         var c=t.cloneNode(true);
         c.setAttribute('aria-hidden','true');
+        c.removeAttribute('tabindex');   /* aria-hidden and tabbable is a trap */
         s.track.appendChild(c);
       });
       s.copies++;
@@ -1295,6 +1373,45 @@ function initMarquee(host){
 initMarquee(document.getElementById('huMq'));
 initMarquee(document.getElementById('ogMq'));
 
+/* ── the strips feed the lightbox too ──
+   these were the only photos on the page you couldn't open, and on a
+   phone they drift past at 150px wide with no hover to grow them.
+   delegation on the host, so the marquee's clones work the same; the
+   src maps a clone back to its place in the strip. runs after
+   initMarquee so the originals are the only tabbable copies. */
+function wireStrip(host){
+  if(!host) return;
+  /* :not([aria-hidden]) — the marquee's clones are already in the DOM by
+     now, and they are the same five photos over again */
+  var tiles=[].slice.call(host.querySelectorAll('.hu-tile:not([aria-hidden="true"])'))
+    .filter(function(t){ return t.querySelector('img'); });
+  if(!tiles.length) return;
+  var stripShots=toShots(tiles), bySrc={};
+  tiles.forEach(function(t,i){
+    var src=t.querySelector('img').getAttribute('src');
+    bySrc[src]=i;
+    t.setAttribute('role','button');
+    t.setAttribute('tabindex','0');
+    t.setAttribute('aria-label','View photo: '+stripShots[i].alt);
+  });
+  function hit(e){
+    var t=e.target.closest&&e.target.closest('.hu-tile');
+    if(!t) return -1;
+    var img=t.querySelector('img');
+    if(!img) return -1;                       /* the video tile keeps playing */
+    var i=bySrc[img.getAttribute('src')];
+    return i==null?-1:i;
+  }
+  host.addEventListener('click',function(e){ var i=hit(e); if(i>=0) openLb(i,stripShots); });
+  host.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    var i=hit(e); if(i<0) return;
+    e.preventDefault(); openLb(i,stripShots);
+  });
+}
+wireStrip(document.getElementById('huMq'));
+wireStrip(document.getElementById('ogMq'));
+
 /* ── the new-EP sleeve — scroll-linked drift ──
    --p is the panel's progress across the viewport, 0 (its top just
    entering at the bottom) → 1 (its bottom just leaving at the top);
@@ -1327,32 +1444,75 @@ initMarquee(document.getElementById('ogMq'));
   sched();
 })();
 
-/* ── interlude tabs — the record ── */
+/* ── interlude tabs — the record ──
+   the stage is a 0fr/1fr grid row. 1fr re-resolves to the new content
+   height the instant a panel swaps, with nothing to transition, so
+   going quotes (475px) -> bookshelf (364px) snapped the page up by a
+   hundred pixels mid-tap. drive the swap through explicit pixels and
+   hand the row back to the class once it lands. */
 (function(){
   var hstage=document.getElementById('hstage');
   if(!hstage) return;
   var hinner=document.getElementById('hstageInner');
   var htabs=[].slice.call(document.querySelectorAll('.htab'));
   var hpanels=[].slice.call(document.querySelectorAll('.hpanel'));
+  var settle=null;
+  /* the fr<->px handoffs have to happen with transitions off: an fr track
+     keeps re-resolving against its content, so pinning 1fr to a pixel
+     value starts a transition that is still chasing the content height
+     when the real one is asked for, and the real one gets cancelled. */
+  function quietly(fn){
+    hstage.style.transition='none';
+    fn();
+    void hstage.offsetHeight;
+    hstage.style.transition='';
+  }
+  /* target = the panel to show, or null to close. closing leaves the
+     panel mounted so there's something to clip while the row collapses. */
+  function stage(target){
+    function land(){
+      quietly(function(){
+        hstage.style.gridTemplateRows='';          /* hand the row back to the class */
+        if(!target) hstage.classList.remove('open');
+      });
+    }
+    clearTimeout(settle);
+    var from=hstage.getBoundingClientRect().height, to=0;
+    /* swap the panel with the row free, read the height it actually wants,
+       then put the row back where it started — all with transitions off, so
+       the page never sees the round trip. (scrollHeight can't do this job:
+       the inner clips, so a shorter panel inside a taller pinned row just
+       reports the row back.) */
+    quietly(function(){
+      hstage.style.gridTemplateRows='';
+      if(target){
+        hpanels.forEach(function(p){p.classList.toggle('on',p===target);});
+        hstage.classList.add('open');
+        hinner.removeAttribute('inert');
+        to=hstage.getBoundingClientRect().height;
+      }else{
+        hinner.setAttribute('inert','');
+      }
+      hstage.style.gridTemplateRows=from+'px';
+    });
+    if(reduce||Math.abs(to-from)<1){ land(); return; }
+    hstage.style.gridTemplateRows=to+'px';         /* clean px -> px */
+    settle=setTimeout(land,480);                   /* just past the .45s row transition */
+  }
   htabs.forEach(function(btn){
     btn.addEventListener('click',function(){
-      var target=document.getElementById(btn.getAttribute('aria-controls'));
-      var isActive=btn.getAttribute('aria-selected')==='true';
-      if(isActive&&hstage.classList.contains('open')){
-        hstage.classList.remove('open');
-        hinner.setAttribute('inert','');
-        btn.setAttribute('aria-selected','false');
-        return;
-      }
-      htabs.forEach(function(t){t.setAttribute('aria-selected',String(t===btn));});
-      hpanels.forEach(function(p){p.classList.toggle('on',p===target);});
-      hstage.classList.add('open');
-      hinner.removeAttribute('inert');
+      var close=btn.getAttribute('aria-selected')==='true'&&hstage.classList.contains('open');
+      htabs.forEach(function(t){t.setAttribute('aria-selected',String(!close&&t===btn));});
+      stage(close?null:document.getElementById(btn.getAttribute('aria-controls')));
     });
   });
 })();
 
-/* ── greek glitch — labels slip into the aegean and swim back ── */
+/* ── greek glitch — labels slip into the aegean and swim back ──
+   the scramble is painted into a .gk-ov layer stacked over the label
+   while the latin underneath keeps holding the box: the lookalikes
+   measure up to 12% wider, so writing them into the live text node
+   shoved the chevrons and the whole tab row sideways every pass. */
 (function(){
   if(reduce) return;
   var els=[].slice.call(document.querySelectorAll('[data-glitch]'));
@@ -1360,11 +1520,23 @@ initMarquee(document.getElementById('ogMq'));
   var G={a:'α',b:'β',c:'ς',d:'δ',e:'ε',f:'φ',g:'γ',h:'η',i:'ι',j:'ξ',k:'κ',l:'λ',m:'μ',n:'ν',o:'ο',p:'ρ',q:'θ',r:'γ',s:'σ',t:'τ',u:'υ',v:'ν',w:'ω',x:'χ',y:'ψ',z:'ζ',
          A:'Α',B:'Β',C:'Σ',D:'Δ',E:'Ε',F:'Φ',G:'Γ',H:'Η',I:'Ι',J:'Ξ',K:'Κ',L:'Λ',M:'Μ',N:'Ν',O:'Ο',P:'Ρ',Q:'Θ',R:'Ρ',S:'Σ',T:'Τ',U:'Υ',V:'Ν',W:'Ω',X:'Χ',Y:'Ψ',Z:'Ζ'};
   function gk(ch){ return G[ch]||ch; }
+  /* split each label once: .gk-base carries the layout and the text a
+     screen reader announces, .gk-ov is the scratch layer */
+  var parts=new WeakMap();
+  els.forEach(function(el){
+    var orig=el.textContent;
+    var base=document.createElement('span'); base.className='gk-base'; base.textContent=orig;
+    var ov=document.createElement('span'); ov.className='gk-ov'; ov.setAttribute('aria-hidden','true');
+    el.textContent='';
+    el.appendChild(base); el.appendChild(ov);
+    parts.set(el,{orig:orig,ov:ov});
+  });
   function glitch(el){
-    if(el.dataset.glitching) return;
-    var orig=el.dataset.orig||(el.dataset.orig=el.textContent);
-    var n=orig.length, step=0;
+    var part=parts.get(el);
+    if(!part||el.dataset.glitching) return;
+    var orig=part.orig, n=orig.length, step=0;
     el.dataset.glitching='1';
+    part.ov.textContent=orig;
     el.classList.add('glitching');
     var iv=setInterval(function(){
       step++;
@@ -1378,20 +1550,25 @@ initMarquee(document.getElementById('ogMq'));
         var r=Math.round(n*(step-5)/4);
         out=orig.slice(0,r)+orig.slice(r).split('').map(gk).join('');
       }
-      el.textContent=out;
+      part.ov.textContent=out;
       if(step>=9){
         clearInterval(iv);
-        el.textContent=orig;
         el.classList.remove('glitching');
+        part.ov.textContent='';
         delete el.dataset.glitching;
       }
     },60);
   }
-  els.forEach(function(el){
-    var host=el.closest('button,a')||el;
-    host.addEventListener('mouseenter',function(){glitch(el);});
-    host.addEventListener('focus',function(){glitch(el);});
-  });
+  /* hover and focus only where there's a real pointer — a touch screen
+     synthesises mouseenter on every tap, so opening a fold or a tab
+     scrambled its own label out from under your thumb */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    els.forEach(function(el){
+      var host=el.closest('button,a')||el;
+      host.addEventListener('mouseenter',function(){glitch(el);});
+      host.addEventListener('focus',function(){glitch(el);});
+    });
+  }
   setInterval(function(){
     if(document.hidden) return;
     glitch(els[(Math.random()*els.length)|0]);
